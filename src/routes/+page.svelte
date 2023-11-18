@@ -1,4 +1,5 @@
 <script>
+	import { onMount } from 'svelte';
 	import InstrumentCard from './InstrumentCard.svelte';
 
 	let instrumentFormHidden = true;
@@ -7,16 +8,28 @@
 	let newInstrument = {
 		name: '',
 		type: '',
-		port: 0,
-		deleted: false
+		port: 0
 	};
 
-	let instruments = [{ name: 'Aqueous SPM', type: 'SPM', port: 5000, deleted: false }];
+	let instruments = [{ name: 'Aqueous SPM', type: 'SPM', port: 5000 }];
+	onMount(() => {});
 
 	function createInstrument() {
 		let instrumentCopy = { ...newInstrument };
-		instruments = [...instruments, instrumentCopy];
-		hideInstrumentForm();
+
+		let port_is_unique = true;
+		instruments.forEach((instrument) => {
+			if (instrument.port == newInstrument.port) {
+				port_is_unique = false;
+			}
+		});
+
+		if (!port_is_unique) {
+			alert('New instrument must run on a unique port!');
+		} else {
+			instruments = [...instruments, instrumentCopy];
+			hideInstrumentForm();
+		}
 	}
 	function showInstrumentForm() {
 		instrumentFormHidden = false;
@@ -30,14 +43,7 @@
 	class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 2xl:grid-cols-8 gap-4 p-4"
 >
 	{#each instruments as instrument}
-		{#if !instrument.deleted}
-			<InstrumentCard
-				bind:deleted={instrument.deleted}
-				name={instrument.name}
-				type={instrument.type}
-				port={instrument.port}
-			/>
-		{/if}
+		<InstrumentCard {...instrument} />
 	{/each}
 	<button
 		class="flex flex-col items-center justify-center card card-hover aspect-square cursor-pointer variant-ghost text-center"

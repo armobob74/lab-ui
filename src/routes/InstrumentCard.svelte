@@ -2,13 +2,12 @@
 	export let name; // string
 	export let type; // string
 	export let port; // string but should parse to an int
-	export let deleted; // bool
 	let iconFromType = {
 		SPM: '[ SPM ]',
 		SmartStageXY: '[ SmartStageXY ]'
 	};
 	function deleteCard() {
-		deleted = true;
+		alert("haven't implimented this yet. Gotta figure out svelte stores for the instrument list.");
 	}
 </script>
 

@@ -12,7 +12,7 @@
 		port: 0
 	};
 
-	let instruments;
+	let instruments = [];
 	instruments_store.subscribe((value) => {
 		instruments = value;
 		console.log(instruments);

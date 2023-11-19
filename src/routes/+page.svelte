@@ -1,6 +1,7 @@
 <script>
 	import { onMount } from 'svelte';
 	import InstrumentCard from './InstrumentCard.svelte';
+	import { instruments_store } from '$lib/stores.js';
 
 	let instrumentFormHidden = true;
 
@@ -11,8 +12,11 @@
 		port: 0
 	};
 
-	let instruments = [{ name: 'Aqueous SPM', type: 'SPM', port: 5000 }];
-	onMount(() => {});
+	let instruments;
+	instruments_store.subscribe((value) => {
+		instruments = value;
+		console.log(instruments);
+	});
 
 	function createInstrument() {
 		let instrumentCopy = { ...newInstrument };
@@ -27,7 +31,10 @@
 		if (!port_is_unique) {
 			alert('New instrument must run on a unique port!');
 		} else {
-			instruments = [...instruments, instrumentCopy];
+			//instruments = [...instruments, instrumentCopy];
+			instruments_store.update((old) => {
+				return [...old, instrumentCopy];
+			});
 			hideInstrumentForm();
 		}
 	}

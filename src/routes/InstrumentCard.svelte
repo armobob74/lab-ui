@@ -2,12 +2,27 @@
 	export let name; // string
 	export let type; // string
 	export let port; // string but should parse to an int
+	import { instruments_store } from '$lib/stores.js';
+	let instruments = [];
+	instruments_store.subscribe((value) => {
+		instruments = value;
+		console.log(instruments);
+	});
 	let iconFromType = {
 		SPM: '[ SPM ]',
 		SmartStageXY: '[ SmartStageXY ]'
 	};
 	function deleteCard() {
-		alert("haven't implimented this yet. Gotta figure out svelte stores for the instrument list.");
+		let i = 0;
+		while (instruments[i].port != port && i < instruments.length) {
+			i++;
+		}
+		if (instruments[i].port == i) {
+			//todo: deletion code here
+			alert('still gotta finish this');
+		} else {
+			alert('Error: can not delete because instrument does not exist');
+		}
 	}
 </script>
 

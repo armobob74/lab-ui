@@ -6,23 +6,17 @@
 	let instruments = [];
 	instruments_store.subscribe((value) => {
 		instruments = value;
-		console.log(instruments);
 	});
 	let iconFromType = {
 		SPM: '[ SPM ]',
 		SmartStageXY: '[ SmartStageXY ]'
 	};
 	function deleteCard() {
-		let i = 0;
-		while (instruments[i].port != port && i < instruments.length) {
-			i++;
-		}
-		if (instruments[i].port == i) {
-			//todo: deletion code here
-			alert('still gotta finish this');
-		} else {
-			alert('Error: can not delete because instrument does not exist');
-		}
+		instruments_store.update((current_instruments) => {
+			return current_instruments.filter((instrument) => {
+				return instrument.port != port;
+			});
+		});
 	}
 </script>
 

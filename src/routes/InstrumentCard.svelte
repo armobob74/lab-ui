@@ -2,28 +2,8 @@
 	export let name; // string
 	export let type; // string
 	export let port; // string but should parse to an int
-	let connected = false;
 	import { instruments_store } from '$lib/stores.js';
-	//import { checkConnection } from '$lib/spm_fetches.js';
-	import { onMount } from 'svelte';
-
-	onMount(() => {
-		async function checkConnection(port) {
-			let target = `http://localhost:${port}`;
-			try {
-				let response = await fetch(target);
-				return response.ok;
-			} catch (error) {
-				return false;
-			}
-		}
-
-		setInterval(() => {
-			checkConnection(port).then((response) => {
-				connected = response;
-			});
-		}, 3000);
-	});
+	import ConnectionStatus from '../lib/ConnectionStatus.svelte';
 
 	let instruments = [];
 	instruments_store.subscribe((value) => {
@@ -54,14 +34,7 @@
 		</p>
 		<div>
 			<h3>{name}</h3>
-			<p>
-				{port}
-				{#if connected}
-					<span class="text-primary-500">connected</span>
-				{:else}
-					<span class="text-error-500">disconnected</span>
-				{/if}
-			</p>
+			<ConnectionStatus {port}>{port}</ConnectionStatus>
 		</div>
 		<div class="links">
 			{#if type == 'SPM'}

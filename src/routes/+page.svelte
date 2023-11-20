@@ -2,7 +2,6 @@
 	import { onMount } from 'svelte';
 	import InstrumentCard from './InstrumentCard.svelte';
 	import { instruments_store } from '$lib/stores.js';
-
 	let instrumentFormHidden = true;
 
 	//binded to values of #new-instrument-form
@@ -15,7 +14,6 @@
 	let instruments = [];
 	instruments_store.subscribe((value) => {
 		instruments = value;
-		console.log(instruments);
 	});
 
 	function createInstrument() {

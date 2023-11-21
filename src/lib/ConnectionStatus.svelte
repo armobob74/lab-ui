@@ -2,7 +2,8 @@
 	export let port;
 	let connected = false;
 	let interval_milisecs = 3000;
-	import { onMount } from 'svelte';
+	let interval;
+	import { onDestroy, onMount } from 'svelte';
 	onMount(() => {
 		async function checkConnection(port) {
 			let target = `http://localhost:${port}`;
@@ -14,9 +15,12 @@
 			}
 		}
 		checkConnection(port);
-		setInterval(() => {
+		interval = setInterval(() => {
 			checkConnection(port);
 		}, interval_milisecs);
+	});
+	onDestroy(() => {
+		clearInterval(interval);
 	});
 </script>
 

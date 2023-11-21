@@ -15,7 +15,9 @@
 				<LightSwitch />
 			</div>
 			<AppRailAnchor href="/" selected={$page.url.pathname === '/'}>Instruments</AppRailAnchor>
-			<AppRailAnchor href="/about" selected={$page.url.pathname === '/about'}>Init</AppRailAnchor>
+			<AppRailAnchor href="/actions" selected={$page.url.pathname === '/actions'}
+				>Actions</AppRailAnchor
+			>
 		</AppRail>
 	</svelte:fragment>
 	<!-- Page Route Content -->

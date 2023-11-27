@@ -11,5 +11,11 @@
 	<AppRailAnchor href="/" selected={$page.url.pathname === '/'}>Instruments</AppRailAnchor>
 	<AppRailAnchor href="/actions" selected={$page.url.pathname === '/actions'}>Actions</AppRailAnchor
 	>
-	<AppRailAnchor href="/table" selected={$page.url.pathname === '/table'}>Table</AppRailAnchor>
+	<AppRailAnchor href="/protocol" selected={$page.url.pathname === '/protocol'}
+		>Protocol</AppRailAnchor
+	>
+	<AppRailAnchor href="/source-dest" selected={$page.url.pathname === '/source-dest'}
+		>SourceDest</AppRailAnchor
+	>
+	<AppRailAnchor href="/steps" selected={$page.url.pathname === '/steps'}>Steps</AppRailAnchor>
 </AppRail>

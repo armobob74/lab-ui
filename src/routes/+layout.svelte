@@ -1,25 +1,13 @@
 <script>
 	import '../app.postcss';
-	import { AppShell, AppBar } from '@skeletonlabs/skeleton';
-	import { page } from '$app/stores';
-	import { AppRail, AppRailTile, AppRailAnchor } from '@skeletonlabs/skeleton';
-	import { LightSwitch } from '@skeletonlabs/skeleton';
+	import { AppShell } from '@skeletonlabs/skeleton';
+	import LeftRail from '../lib/LeftRail.svelte';
 </script>
 
 <!-- for documentation check out https://www.skeleton.dev/components/app-shell-->
 <!-- App Shell -->
 <AppShell>
-	<svelte:fragment slot="sidebarLeft">
-		<AppRail>
-			<div class="p-2 flex flex-row justify-center">
-				<LightSwitch />
-			</div>
-			<AppRailAnchor href="/" selected={$page.url.pathname === '/'}>Instruments</AppRailAnchor>
-			<AppRailAnchor href="/actions" selected={$page.url.pathname === '/actions'}
-				>Actions</AppRailAnchor
-			>
-		</AppRail>
-	</svelte:fragment>
+	<svelte:fragment slot="sidebarLeft"><LeftRail /></svelte:fragment>
 	<!-- Page Route Content -->
 	<slot />
 </AppShell>

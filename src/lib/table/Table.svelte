@@ -17,13 +17,16 @@
 
 	function addRow() {
 		tables_store.update((tables) => {
-			tables = { ...tables };
 			tables[id].data = [...data, [...newRow]];
 			return tables;
 		});
 	}
 	function deleteRow(rowToBeDeleted) {
 		data = data.filter((row) => row != rowToBeDeleted);
+		tables_store.update((tables) => {
+			tables[id].data = data;
+			return tables;
+		});
 	}
 	let newRow = Array(columns.length);
 </script>
@@ -42,7 +45,7 @@
 				{#each row as cell, idx}
 					{#if columns[idx] in options}
 						<td
-							><select>
+							><select bind:value={cell}>
 								{#each options[columns[idx]] as option}
 									<option>{option}</option>
 								{/each}

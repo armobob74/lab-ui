@@ -9,6 +9,7 @@
 	let extension_correct = false;
 	let tabcheck = false;
 	let tabs_correct = new Promise(() => {});
+	let messages = [];
 
 	async function fileUploadHandler() {
 		file = files[0];
@@ -79,13 +80,27 @@
 	function updateTable(table_id, columns, data) {
 		tables_store.update((tables) => {
 			if (columns.length != tables[table_id].columns.length) {
-				alert(
-					`Unable to update ${table_id} because of column mismatch. Check console for more details.`
-				);
-				console.log(`Spreaadsheet columns: "${columns.length}"`);
-				console.log(`Required columns: "${tables[table_id].columns.length}"`);
+				messages = [
+					...messages,
+					{
+						text: `Unable to update ${table_id} because of column mismatch.`,
+						classList: 'text-error-500'
+					},
+					{
+						text: `Spreadsheet columns: "${columns.length}"`,
+						classList: 'text-error-500'
+					},
+					{
+						text: `Required columns: "${tables[table_id].columns.length}"`,
+						classList: 'text-error-500'
+					}
+				];
 				return tables;
 			}
+			messages = [
+				...messages,
+				{ text: `Updated ${table_id}`, classList: 'dark:text-success-500 text-success-800' }
+			];
 			tables[table_id].data = data;
 			return tables;
 		});
@@ -117,4 +132,7 @@
 			{/if}
 		</div>
 	{/await}
+	{#each messages as message}
+		<p class={message.classList}>{message.text}</p>
+	{/each}
 </div>

@@ -10,4 +10,6 @@
 	let options = { Port: ports };
 </script>
 
-<Table id={'sourceDest'} {options} />
+<div class="p-2">
+	<Table id={'sourceDest'} {options} />
+</div>

@@ -2,4 +2,6 @@
 	import Table from '$lib/table/Table.svelte';
 </script>
 
-<Table id={'steps'} />
+<div class="p-2">
+	<Table id={'steps'} />
+</div>

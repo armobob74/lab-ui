@@ -1,6 +1,7 @@
 <script>
 	import { FileDropzone } from '@skeletonlabs/skeleton';
 	import { read, utils, writeFileXLSX } from 'xlsx';
+	import { tables_store } from '$lib/stores.js';
 	let files; //FileList
 	let file;
 
@@ -13,6 +14,7 @@
 		file = files[0];
 		checkFileExtension();
 		tabs_correct = await checkFileTabs();
+		await readTables();
 	}
 
 	function checkFileExtension() {
@@ -47,6 +49,46 @@
 		} else {
 			return false;
 		}
+	}
+
+	async function readTables() {
+		const arrayBuffer = await file.arrayBuffer();
+		const workbook = read(arrayBuffer);
+		const requiredTabs = ['Protocol', 'SourceDest', 'Steps'];
+		const tab_to_table_id = {
+			Protocol: 'protocol',
+			SourceDest: 'sourceDest',
+			Steps: 'steps'
+		};
+		requiredTabs.forEach((tab) => {
+			const worksheet = workbook.Sheets[tab];
+			const jsonData = utils.sheet_to_json(worksheet, { header: 1 });
+			//TODO: extract columns and rows from each tab and update the localStorageStore stuff
+			const columns = jsonData[0];
+			const data = jsonData.slice(1);
+			data.forEach((row) => {
+				while (row.length < columns.length) {
+					row.push(''); // Add a zero to the end of the row
+				}
+			});
+			let table_id = tab_to_table_id[tab];
+			updateTable(table_id, columns, data);
+		});
+	}
+
+	function updateTable(table_id, columns, data) {
+		tables_store.update((tables) => {
+			if (columns.length != tables[table_id].columns.length) {
+				alert(
+					`Unable to update ${table_id} because of column mismatch. Check console for more details.`
+				);
+				console.log(`Spreaadsheet columns: "${columns.length}"`);
+				console.log(`Required columns: "${tables[table_id].columns.length}"`);
+				return tables;
+			}
+			tables[table_id].data = data;
+			return tables;
+		});
 	}
 </script>
 

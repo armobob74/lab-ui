@@ -16,7 +16,11 @@
 	});
 
 	function addRow() {
-		data = [...data, [...newRow]];
+		tables_store.update((tables) => {
+			tables = { ...tables };
+			tables[id].data = [...data, [...newRow]];
+			return tables;
+		});
 	}
 	function deleteRow(rowToBeDeleted) {
 		data = data.filter((row) => row != rowToBeDeleted);

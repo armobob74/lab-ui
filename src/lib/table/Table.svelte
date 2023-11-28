@@ -31,7 +31,7 @@
 	let newRow = Array(columns.length);
 </script>
 
-<table class="table" {id}>
+<table class="table variant-ghost" {id}>
 	<thead>
 		<tr>
 			{#each columns as column}

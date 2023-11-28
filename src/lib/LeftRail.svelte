@@ -9,7 +9,8 @@
 		<LightSwitch />
 	</div>
 	<AppRailAnchor href="/" selected={$page.url.pathname === '/'}>Instruments</AppRailAnchor>
-	<AppRailAnchor href="/actions" selected={$page.url.pathname === '/actions'}>Actions</AppRailAnchor
+	<AppRailAnchor href="/upload-xlsx" selected={$page.url.pathname === '/upload-xlsx'}
+		>Upload .xlsx</AppRailAnchor
 	>
 	<AppRailAnchor href="/protocol" selected={$page.url.pathname === '/protocol'}
 		>Protocol</AppRailAnchor

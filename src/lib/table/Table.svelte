@@ -31,12 +31,13 @@
 	let newRow = Array(columns.length);
 </script>
 
-<table class="table variant-ghost" {id}>
+<table class="table" {id}>
 	<thead>
 		<tr>
 			{#each columns as column}
 				<th>{column}</th>
 			{/each}
+			<th />
 		</tr>
 	</thead>
 	<tbody>

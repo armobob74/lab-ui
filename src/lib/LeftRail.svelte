@@ -18,5 +18,5 @@
 	<AppRailAnchor href="/source-dest" selected={$page.url.pathname === '/source-dest'}
 		>SourceDest</AppRailAnchor
 	>
-	<AppRailAnchor href="/steps" selected={$page.url.pathname === '/steps'}>Steps</AppRailAnchor>
+	<AppRailAnchor href="/docs" selected={$page.url.pathname === '/docs'}>Docs</AppRailAnchor>
 </AppRail>

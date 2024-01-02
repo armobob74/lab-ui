@@ -6,7 +6,7 @@ export const instruments_store = localStorageStore('instruments', [
 
 export const tables_store = localStorageStore('tables', {
 	protocol: {
-		columns: ['Step Type', 'Arg1', 'Arg2', 'Arg3', 'Arg4', 'Arg5'],
+		columns: ['Instrument Name', 'Step', 'Args', 'id', 'wait for'],
 		data: []
 	},
 	sourceDest: {

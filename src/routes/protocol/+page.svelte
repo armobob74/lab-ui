@@ -1,6 +1,7 @@
 <script>
 	import Table from '$lib/table/Table.svelte';
 	import { instruments_store } from '$lib/stores.js';
+	import { step_names } from '$lib/steps.js';
 	let ports = [];
 	let names = [];
 	instruments_store.subscribe((instruments) => {
@@ -11,7 +12,8 @@
 	});
 
 	let options = {
-		'Instrument Name': names
+		'Instrument Name': names,
+		Step: Object.keys(step_names)
 	};
 </script>
 

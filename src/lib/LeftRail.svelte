@@ -19,4 +19,5 @@
 		>SourceDest</AppRailAnchor
 	>
 	<AppRailAnchor href="/docs" selected={$page.url.pathname === '/docs'}>Docs</AppRailAnchor>
+	<AppRailAnchor href="/run" selected={$page.url.pathname === '/run'}>Run</AppRailAnchor>
 </AppRail>

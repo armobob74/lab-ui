@@ -10,5 +10,5 @@ export async function fetchPOST(endpoint, data) {
 }
 
 export function pmanPOST(url, argslist) {
-	fetchPOST(url, { args: argslist });
+	return fetchPOST(url, { args: argslist });
 }

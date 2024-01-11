@@ -38,11 +38,7 @@
 			<ConnectionStatus {port}>{port}</ConnectionStatus>
 		</div>
 		<div class="links">
-			{#if type == 'SPM'}
-				<a target="_blank" class="btn variant-filled" href="http://localhost:{port}">interface</a>
-			{:else if type == 'SmartStageXY'}
-				<a target="_blank" class="btn variant-filled" href="http://localhost:{port}">interface</a>
-			{/if}
+			<a target="_blank" class="btn variant-filled" href="http://localhost:{port}">interface</a>
 		</div>
 	</div>
 </div>

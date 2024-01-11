@@ -13,6 +13,30 @@ class Step {
 	}
 }
 
+class HamiltonTransfer extends Step {
+	constructor(args_list) {
+		//args_list format: ['port', 'from_port', 'to_port', 'vol']
+		super(args_list);
+		this.port = args_list[0];
+		this.from_port = args_list[1];
+		this.to_port = args_list[2];
+		this.vol = args_list[3];
+		this.url = `http://localhost:${this.port}/pman/transfer`;
+		this.url_2 = `http://localhost:${this.port}/pman/listen`;
+	}
+	async action() {
+		// sends a request to server to begin transfer
+		// first response indicates that transfer has started
+		let transfer_started_response = await pmanPOST(this.url, [
+			this.from_port,
+			this.to_port,
+			this.vol
+		]);
+		// now tell server to listen for the second response,
+		// which indicates that the transfer has finished
+		return pmanPOST(this.url_2, []);
+	}
+}
 class SPM_Transfer extends Step {
 	constructor(args_list) {
 		//args_list format: ['port', 'from_port', 'to_port', 'vol']
@@ -48,7 +72,9 @@ class DLIPowerSwitch extends Step {
 }
 
 // used to make options for the <select> tag in Protocol table
+// later used to create the Step list in the Run page
 export let step_names = {
 	'SPM Transfer': SPM_Transfer,
-	'DLI Power Switch': DLIPowerSwitch
+	'DLI Power Switch': DLIPowerSwitch,
+	'Hamilton Transfer': HamiltonTransfer
 };

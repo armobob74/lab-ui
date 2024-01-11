@@ -12,7 +12,8 @@
 	let iconFromType = {
 		SPM: '[ SPM ]',
 		SmartStageXY: '[ SmartStageXY ]',
-		DLIPower: '[ DLI Power ]'
+		DLIPower: '[ DLI Power ]',
+		HamiltonPump: '[ Hamilton Pump ]'
 	};
 	function deleteCard() {
 		instruments_store.update((current_instruments) => {

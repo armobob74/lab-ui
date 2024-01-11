@@ -3,13 +3,12 @@
 	import { step_names } from '$lib/steps.js';
 	import { instruments_store } from '$lib/stores.js';
 
+	// 'Instrument Name', 'Step', 'Args'
 	let instruments;
 	instruments_store.subscribe((data) => {
 		instruments = data;
 	});
 
-	console.log(instruments);
-	// 'Instrument Name', 'Step', 'Args'
 	let protocol_table;
 	let steps = ['A'];
 	tables_store.subscribe((tables) => {
@@ -21,6 +20,7 @@
 			});
 			// args does not include port num
 			let args = row[2].split(',');
+			console.log(args);
 			// args_list actually goes to the Step object
 			let args_list = [instrument.port].concat(args);
 			let step = new step_class((args_list = args_list));

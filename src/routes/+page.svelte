@@ -78,6 +78,7 @@
 				<option>SPM</option>
 				<option>SmartStageXY</option>
 				<option>DLIPower</option>
+				<option>HamiltonPump</option>
 			</select>
 			<label for="port">Port</label>
 			<input bind:value={newInstrument.port} type="text" class="input p-3" name="port" />

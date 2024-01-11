@@ -77,6 +77,7 @@
 			<select bind:value={newInstrument.type} class="select" name="type">
 				<option>SPM</option>
 				<option>SmartStageXY</option>
+				<option>DLIPower</option>
 			</select>
 			<label for="port">Port</label>
 			<input bind:value={newInstrument.port} type="text" class="input p-3" name="port" />

@@ -11,7 +11,8 @@
 	});
 	let iconFromType = {
 		SPM: '[ SPM ]',
-		SmartStageXY: '[ SmartStageXY ]'
+		SmartStageXY: '[ SmartStageXY ]',
+		DLIPower: '[ DLI Power ]'
 	};
 	function deleteCard() {
 		instruments_store.update((current_instruments) => {

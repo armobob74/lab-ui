@@ -1,7 +1,7 @@
 <script>
 	import { Accordion, AccordionItem } from '@skeletonlabs/skeleton';
 
-	let openStates = [false, false];
+	let openStates = [false, false, false];
 
 	function openAll() {
 		openStates = openStates.map(() => true);
@@ -40,6 +40,16 @@
 				<ol>
 					<li>
 						<a href="/docs/smart-stage-xy/move-to-well"> move-to-well [name, well]</a>
+					</li>
+				</ol>
+			</svelte:fragment>
+		</AccordionItem>
+		<AccordionItem bind:open={openStates[2]}>
+			<svelte:fragment slot="summary">DLI Power</svelte:fragment>
+			<svelte:fragment slot="content">
+				<ol>
+					<li>
+						<a href="/docs/dlipower/control"> control [button_name, action]</a>
 					</li>
 				</ol>
 			</svelte:fragment>

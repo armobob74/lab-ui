@@ -31,7 +31,24 @@ class SPM_Transfer extends Step {
 	}
 }
 
+class DLIPowerSwitch extends Step {
+	constructor(args_list) {
+		//args_list format: [port, button_name,on/off]
+		super(args_list);
+		this.port = args_list[0];
+		this.button_name = args_list[1];
+		this.on_or_off = args_list[2];
+		this.url = `http://localhost:${this.port}/pman/control`;
+	}
+	async action() {
+		// not quite a pman call but that's ok
+		// make a POST request to one of the dlipower endpoints
+		return pmanPOST(this.url, [this.button_name, this.on_or_off]);
+	}
+}
+
 // used to make options for the <select> tag in Protocol table
 export let step_names = {
-	'SPM Transfer': SPM_Transfer
+	'SPM Transfer': SPM_Transfer,
+	'DLI Power Switch': DLIPowerSwitch
 };

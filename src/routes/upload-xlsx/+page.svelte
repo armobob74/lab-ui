@@ -109,9 +109,16 @@
 
 <div class="p-4 flex flex-col justify-center">
 	<h2 class="h2">File Upload</h2>
-	<h2 class="h2 text-red-500">!!! Out of Order, do not use !!!</h2>
-	<p>File must be a .xlsx with three case-sensitive tabs: Protocol, SourceDest, Steps</p>
-	<p>Uploading a file will overwrite the current state of the tables on the app</p>
+	<ul>
+		<li>File type must be .xlsx</li>
+		<li>
+			Formated like the <a class="a text-blue-500" href="/docs/examples/protocol-table"
+				>example here</a
+			>
+		</li>
+		<li>Uploading a file will overwrite the current state of the tables on the app</li>
+	</ul>
+
 	<div class="mt-4">
 		<FileDropzone name="xlsx" bind:files on:change={fileUploadHandler}
 			><p slot="message"><strong>Upload a file</strong> or drag and drop</p></FileDropzone

@@ -76,6 +76,21 @@
 			</svelte:fragment>
 		</AccordionItem>
 	</Accordion>
+
+	<h3 class="h3">Basics: Steps and Protocols</h3>
+	<p>
+		a <strong>step</strong> is an action performed by a single <strong>instrument</strong>, usually
+		through a single HTTP request. A <strong>protocol</strong> is a table of <strong>steps</strong>
+		that are executed sequentially. To view or edit protocol tables, look at the
+		<a href="/protocol">protocol page</a>. To understand the layout, look at the example
+		<a href="/docs/examples/protocol-table">here</a>. And to run an individual protocol table, go to
+		the <a href="/run-protocol">run protocol</a> tab.
+	</p>
+	<h3 class="h3">Running Protocols</h3>
+	<p>
+		In addition to being run individually, protocols can be run sequentially or in parallel. This
+		functionality is currently in development.
+	</p>
 </div>
 
 <style lang="scss">

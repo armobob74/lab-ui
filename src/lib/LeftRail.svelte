@@ -19,5 +19,7 @@
 		>SourceDest</AppRailAnchor
 	>
 	<AppRailAnchor href="/docs" selected={$page.url.pathname === '/docs'}>Docs</AppRailAnchor>
-	<AppRailAnchor href="/run" selected={$page.url.pathname === '/run'}>Run</AppRailAnchor>
+	<AppRailAnchor href="/run-protocol" selected={$page.url.pathname === '/run-protocol'}
+		>Run Protocol</AppRailAnchor
+	>
 </AppRail>

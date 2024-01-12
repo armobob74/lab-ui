@@ -12,13 +12,13 @@
 
 	let all_tables;
 	let table;
+	let table_id;
 	let steps = ['A'];
-	let table_id = 'protocol';
 	tables_store.subscribe((tables) => {
 		all_tables = tables;
 	});
 
-	$: {
+	$: if(table_id) {
 		table = all_tables[table_id];
 		steps = table.data.map((row) => {
 			let step_class = step_names[row[1]];

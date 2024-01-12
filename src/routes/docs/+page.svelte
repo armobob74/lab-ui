@@ -1,7 +1,7 @@
 <script>
 	import { Accordion, AccordionItem } from '@skeletonlabs/skeleton';
 
-	let openStates = [false, false, false];
+	let openStates = Array(5).fill(false);
 
 	function openAll() {
 		openStates = openStates.map(() => true);
@@ -50,6 +50,27 @@
 				<ol>
 					<li>
 						<a href="/docs/dlipower/control"> control [button_name, action]</a>
+					</li>
+				</ol>
+			</svelte:fragment>
+		</AccordionItem>
+		<AccordionItem bind:open={openStates[3]}>
+			<svelte:fragment slot="summary">Hamilton Pump</svelte:fragment>
+			<svelte:fragment slot="content">
+				<ol>
+					<li>
+						<a href="/docs/hamilton-pump/transfer"> transfer [from_port, to_port, vol]</a>
+					</li>
+				</ol>
+			</svelte:fragment>
+		</AccordionItem>
+		<AccordionItem bind:open={openStates[4]}>
+			<svelte:fragment slot="summary">Tuya FingerBot</svelte:fragment>
+			<svelte:fragment slot="content">
+				<ol>
+					<li>
+						<a href="/docs/tuya-fingerbot/single-press">single-press []</a>
+						<a href="/docs/tuya-fingerbot/double-press">double-press [delay]</a>
 					</li>
 				</ol>
 			</svelte:fragment>

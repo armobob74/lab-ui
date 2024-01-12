@@ -2,6 +2,7 @@
 	import { tables_store } from '$lib/stores.js';
 	import { step_names } from '$lib/steps.js';
 	import { instruments_store } from '$lib/stores.js';
+	import TableIdSelect from '../../lib/table/TableIdSelect.svelte';
 
 	// 'Instrument Name', 'Step', 'Args'
 	let instruments;
@@ -9,11 +10,17 @@
 		instruments = data;
 	});
 
-	let protocol_table;
+	let all_tables;
+	let table;
 	let steps = ['A'];
+	let table_id = 'protocol';
 	tables_store.subscribe((tables) => {
-		protocol_table = tables['protocol'];
-		steps = protocol_table.data.map((row) => {
+		all_tables = tables;
+	});
+
+	$: {
+		table = all_tables[table_id];
+		steps = table.data.map((row) => {
 			let step_class = step_names[row[1]];
 			let instrument = instruments.find((ins) => {
 				return ins.name == row[0];
@@ -26,7 +33,7 @@
 			let step = new step_class((args_list = args_list));
 			return step;
 		});
-	});
+	}
 
 	async function run() {
 		for (let i = 0; i < steps.length; i++) {
@@ -39,6 +46,7 @@
 	}
 </script>
 
+<TableIdSelect bind:table_id />
 <table class="table m-4" style="background:none">
 	<tr>
 		<th>URL</th>

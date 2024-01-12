@@ -1,6 +1,7 @@
 <script>
 	import Table from '$lib/table/Table.svelte';
 	import { instruments_store } from '$lib/stores.js';
+	import TableIdSelect from '../../lib/table/TableIdSelect.svelte';
 	import { step_names } from '$lib/steps.js';
 	let ports = [];
 	let names = [];
@@ -15,8 +16,11 @@
 		'Instrument Name': names,
 		Step: Object.keys(step_names)
 	};
+	let table_id;
+	console.log(table_id);
 </script>
 
+<TableIdSelect bind:table_id />
 <div class="p-2">
-	<Table id={'protocol'} {options} />
+	<Table id={table_id} {options} />
 </div>

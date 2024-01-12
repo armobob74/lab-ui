@@ -52,13 +52,13 @@
 
 	function updateTable(table_id, columns, data) {
 		tables_store.update((tables) => {
-			messages = [...messages, { text: `Updated table: ${table_id}`, classList: classListSuccess }];
 			tables[table_id] = {
 				columns: columns,
 				data: data
 			};
 			return tables;
 		});
+		messages = [...messages, { text: `Updated table: ${table_id}`, classList: classListSuccess }];
 	}
 </script>
 

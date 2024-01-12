@@ -9,11 +9,15 @@
 	];
 	export let options = {};
 	let table;
-	tables_store.subscribe((tables) => {
-		table = tables[id];
-		columns = table.columns;
-		data = table.data;
-	});
+
+	$: if (id) {
+		console.log('loading table', id);
+		tables_store.subscribe((tables) => {
+			table = tables[id];
+			columns = table.columns;
+			data = table.data;
+		});
+	}
 
 	function addRow() {
 		tables_store.update((tables) => {

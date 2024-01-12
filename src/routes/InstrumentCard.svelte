@@ -13,7 +13,8 @@
 		SPM: '[ SPM ]',
 		SmartStageXY: '[ SmartStageXY ]',
 		DLIPower: '[ DLI Power ]',
-		HamiltonPump: '[ Hamilton Pump ]'
+		HamiltonPump: '[ Hamilton Pump ]',
+		TuyaFingerBot: '[ Tuya FingerBot ]'
 	};
 	function deleteCard() {
 		instruments_store.update((current_instruments) => {

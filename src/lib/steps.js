@@ -104,5 +104,6 @@ export let step_names = {
 	'SPM Transfer': SPM_Transfer,
 	'DLI Power Switch': DLIPowerSwitch,
 	'Hamilton Transfer': HamiltonTransfer,
-	'Tuya Single Press': TuyaSinglePress
+	'Tuya Single Press': TuyaSinglePress,
+	'Tuya Double Press': TuyaDoublePress
 };

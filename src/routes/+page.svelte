@@ -79,6 +79,7 @@
 				<option>SmartStageXY</option>
 				<option>DLIPower</option>
 				<option>HamiltonPump</option>
+				<option>TuyaFingerBot</option>
 			</select>
 			<label for="port">Port</label>
 			<input bind:value={newInstrument.port} type="text" class="input p-3" name="port" />

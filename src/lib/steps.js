@@ -65,9 +65,36 @@ class DLIPowerSwitch extends Step {
 		this.url = `http://localhost:${this.port}/pman/control`;
 	}
 	async action() {
-		// not quite a pman call but that's ok
-		// make a POST request to one of the dlipower endpoints
 		return pmanPOST(this.url, [this.button_name, this.on_or_off]);
+	}
+}
+
+class TuyaSinglePress extends Step {
+	constructor(args_list) {
+		//args_list format: [port]
+		super(args_list);
+		this.port = args_list[0];
+		this.url = `http://localhost:${this.port}/pman/single-press`;
+	}
+	async action() {
+		// should press tuya button exactly once
+		return pmanPOST(this.url, []);
+	}
+}
+
+class TuyaDoublePress extends Step {
+	constructor(args_list) {
+		//args_list format: [port, delay_sec]
+		super(args_list);
+		this.port = args_list[0];
+		this.delay_sec = args_list[1];
+		this.url = `http://localhost:${this.port}/pman/double-press`;
+	}
+	async action() {
+		// should press tuya button once, then
+		// wait delay_sec seconds, then
+		// press button again
+		return pmanPOST(this.url, [this.delay_sec]);
 	}
 }
 
@@ -76,5 +103,6 @@ class DLIPowerSwitch extends Step {
 export let step_names = {
 	'SPM Transfer': SPM_Transfer,
 	'DLI Power Switch': DLIPowerSwitch,
-	'Hamilton Transfer': HamiltonTransfer
+	'Hamilton Transfer': HamiltonTransfer,
+	'Tuya Single Press': TuyaSinglePress
 };

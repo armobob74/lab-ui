@@ -1,11 +1,15 @@
 <script>
+	import { createEventDispatcher } from 'svelte';
 	import { instruments_store, tables_store } from '$lib/stores.js';
 	import { step_names } from '$lib/steps.js';
 	export let table_id;
+	export let run_trigger = false; //if set to true by parent, run begins
 	let all_tables;
 	let table;
 	let steps = [];
 	let instruments;
+
+	const dispatch = createEventDispatcher();
 
 	// instruments_store is used to translate name to port
 	// 'Instrument Name', 'Step', 'Args'
@@ -39,6 +43,23 @@
 	}
 	$: if (table_id) {
 		reactivityShield();
+	}
+
+	async function run() {
+		for (let i = 0; i < steps.length; i++) {
+			let step = steps[i];
+			console.log('running step', i);
+			step.is_active = true;
+			//trigger reactivity
+			steps = steps;
+			await step.action();
+			step.is_active = false;
+		}
+	}
+	$: if (run_trigger) {
+		run().then(() => {
+			dispatch('runCompleted');
+		});
 	}
 </script>
 

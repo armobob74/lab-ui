@@ -3,21 +3,21 @@
 	import RunProtocol from './RunProtocol.svelte'
 
 	let table_id;
+	let run_trigger = false;
 
-	async function run() {
-		for (let i = 0; i < steps.length; i++) {
-			let step = steps[i];
-			console.log('running step',i)
-			step.is_active = true;
-			//trigger reactivity
-			steps = steps;
-			await step.action();
-			step.is_active = false;
-		}
+	async function run(){
+		//trigger the run function of the RunProtocol child?
+		run_trigger = true;
+		console.log("run begins")
 	}
+
+	function handleCompletion(){
+		console.log("done!")
+	}
+
 </script>
 <TableIdSelect bind:table_id />
-<RunProtocol {table_id}/>
+<RunProtocol {table_id} {run_trigger} on:runCompleted={handleCompletion}/>
 
 <button class="btn variant-filled" type="button" on:click={run}>Run</button>
 

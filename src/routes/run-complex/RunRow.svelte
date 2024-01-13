@@ -12,7 +12,7 @@
 	function handleCompletion() {
 		unfinished_protocols -= 1;
 		if (unfinished_protocols === 0) {
-			dispatchEvent('rowCompleted');
+			dispatch('rowCompleted');
 		}
 	}
 </script>

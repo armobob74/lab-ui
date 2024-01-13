@@ -6,6 +6,7 @@
 	let data;
 	let columns;
 	let run_triggers;
+	let active_row_idx = 0;
 
 	$: if (table_id) {
 		tables_store.subscribe((tables) => {
@@ -17,25 +18,19 @@
 			run_triggers = Array(data.length).fill(false);
 		});
 	}
+	function runNextRow() {
+		run_triggers[active_row_idx] = true;
+		active_row_idx += 1;
+	}
 
 	$: if (run_trigger) {
-		run_triggers[0] = true;
+		runNextRow();
 	}
 </script>
 
 {#if columns.length === 0}
 	{#each data as row, idx}
-		<RunRow
-			{row}
-			run_trigger={run_triggers[idx]}
-			on:rowCompleted={() => {
-				if (idx + 1 < data.length) {
-					run_triggers[idx + 1] = true;
-				} else {
-					console.log('done!');
-				}
-			}}
-		/>
+		<RunRow {row} run_trigger={run_triggers[idx]} on:rowCompleted={runNextRow} />
 		<hr />
 	{/each}
 {:else}

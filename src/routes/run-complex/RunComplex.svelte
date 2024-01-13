@@ -1,0 +1,43 @@
+<script>
+	import { tables_store } from '$lib/stores.js';
+	import RunRow from './RunRow.svelte';
+	export let table_id;
+	export let run_trigger;
+	let data;
+	let columns;
+	let run_triggers;
+
+	$: if (table_id) {
+		tables_store.subscribe((tables) => {
+			let table = tables[table_id];
+			data = table.data;
+			// columns.length must be equal to zero
+			// otherwise it's a protocol sheet, not a main sheet
+			columns = table.columns;
+			run_triggers = Array(data.length).fill(false);
+		});
+	}
+
+	$: if (run_trigger) {
+		run_triggers[0] = true;
+	}
+</script>
+
+{#if columns.length === 0}
+	{#each data as row, idx}
+		<RunRow
+			{row}
+			run_trigger={run_triggers[idx]}
+			on:rowCompleted={() => {
+				if (idx + 1 < data.length) {
+					run_triggers[idx + 1] = true;
+				} else {
+					console.log('done!');
+				}
+			}}
+		/>
+		<hr />
+	{/each}
+{:else}
+	<h2 class="text-error-500">Error: first row is supposed to be blank</h2>
+{/if}

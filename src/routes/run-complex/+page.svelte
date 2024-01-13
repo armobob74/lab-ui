@@ -1,10 +1,9 @@
 <script>
 	import TableIdSelect from '../../lib/table/TableIdSelect.svelte';
-	import RunProtocol from './RunProtocol.svelte';
+	import RunComplex from './RunComplex.svelte';
 
-	let table_id;
+	let table_id = 'main';
 	let run_trigger = false;
-
 	async function run() {
 		//trigger the run function of the RunProtocol child
 		run_trigger = true;
@@ -17,7 +16,7 @@
 </script>
 
 <TableIdSelect bind:table_id />
-<RunProtocol {table_id} {run_trigger} on:runCompleted={handleCompletion} />
+<RunComplex {table_id} {run_trigger} />
 
 <button class="btn variant-filled" type="button" on:click={run}>Run</button>
 

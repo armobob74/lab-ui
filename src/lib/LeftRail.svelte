@@ -22,4 +22,7 @@
 	<AppRailAnchor href="/run-protocol" selected={$page.url.pathname === '/run-protocol'}
 		>Run Protocol</AppRailAnchor
 	>
+	<AppRailAnchor href="/run-complex" selected={$page.url.pathname === '/run-complex'}
+		>Run Complex</AppRailAnchor
+	>
 </AppRail>

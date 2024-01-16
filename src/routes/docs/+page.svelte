@@ -1,7 +1,7 @@
 <script>
 	import { Accordion, AccordionItem } from '@skeletonlabs/skeleton';
 
-	let openStates = Array(5).fill(false);
+	let openStates = Array(100).fill(false);
 
 	function openAll() {
 		openStates = openStates.map(() => true);
@@ -71,6 +71,16 @@
 					<li>
 						<a href="/docs/tuya-fingerbot/single-press">single-press []</a>
 						<a href="/docs/tuya-fingerbot/double-press">double-press [delay]</a>
+					</li>
+				</ol>
+			</svelte:fragment>
+		</AccordionItem>
+		<AccordionItem bind:open={openStates[5]}>
+			<svelte:fragment slot="summary">Virtual Instrument</svelte:fragment>
+			<svelte:fragment slot="content">
+				<ol>
+					<li>
+						<a href="/docs/virtual/alert">alert [yes_action, no_action]</a>
 					</li>
 				</ol>
 			</svelte:fragment>

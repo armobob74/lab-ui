@@ -14,7 +14,8 @@
 		SmartStageXY: '[ SmartStageXY ]',
 		DLIPower: '[ DLI Power ]',
 		HamiltonPump: '[ Hamilton Pump ]',
-		TuyaFingerBot: '[ Tuya FingerBot ]'
+		TuyaFingerBot: '[ Tuya FingerBot ]',
+		VirtualInstrument: '[ Virtual Instrument ]'
 	};
 	function deleteCard() {
 		instruments_store.update((current_instruments) => {
@@ -37,10 +38,14 @@
 		</p>
 		<div>
 			<h3>{name}</h3>
-			<ConnectionStatus {port}>{port}</ConnectionStatus>
+			{#if type !== 'VirtualInstrument'}
+				<ConnectionStatus {port}>{port}</ConnectionStatus>
+			{/if}
 		</div>
 		<div class="links">
-			<a target="_blank" class="btn variant-filled" href="http://localhost:{port}">interface</a>
+			{#if type !== 'VirtualInstrument'}
+				<a target="_blank" class="btn variant-filled" href="http://localhost:{port}">interface</a>
+			{/if}
 		</div>
 	</div>
 </div>

@@ -81,6 +81,7 @@
 				<ol>
 					<li>
 						<a href="/docs/virtual/alert">alert [yes_action, no_action]</a>
+						<a href="/docs/virtual/wait">wait [seconds]</a>
 					</li>
 				</ol>
 			</svelte:fragment>

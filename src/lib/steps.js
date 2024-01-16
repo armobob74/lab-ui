@@ -98,6 +98,23 @@ class TuyaDoublePress extends Step {
 	}
 }
 
+class Wait extends Step {
+	constructor(args_list) {
+		//args_list format: [sec]
+		super(args_list);
+		this.sec = args_list[1];
+		this.url = `N/A`;
+	}
+	async action() {
+		// wait for sec seconds, then resolve
+		return new Promise((resolve) => {
+			setTimeout(() => {
+				resolve(`Resolved after ${this.sec} seconds`);
+			}, this.sec * 1000); // Convert seconds to milliseconds
+		});
+	}
+}
+
 // used to make options for the <select> tag in Protocol table
 // later used to create the Step list in the Run page
 export let step_names = {
@@ -105,5 +122,6 @@ export let step_names = {
 	'DLI Power Switch': DLIPowerSwitch,
 	'Hamilton Transfer': HamiltonTransfer,
 	'Tuya Single Press': TuyaSinglePress,
-	'Tuya Double Press': TuyaDoublePress
+	'Tuya Double Press': TuyaDoublePress,
+	Wait: Wait
 };

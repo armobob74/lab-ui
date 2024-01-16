@@ -57,7 +57,7 @@
 							</select></td
 						>
 					{:else}
-						<td contenteditable="true" bind:innerHTML={cell} />
+						<td contenteditable="true" bind:innerText={cell} />
 					{/if}
 				{/each}
 				<button class="btn variant-filled" on:click={() => deleteRow(row)}>X</button>

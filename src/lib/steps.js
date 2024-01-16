@@ -115,6 +115,28 @@ class Wait extends Step {
 	}
 }
 
+class Pause extends Step {
+	constructor(args_list) {
+		//args_list format: [sec]
+		super(args_list);
+		this.url = `N/A`;
+	}
+	async action() {
+		let resume = confirm('continue?');
+		if (resume) {
+			return;
+		} else {
+			document.location.reload();
+			//set a timeout so it does not immediately resolve before doc refresh
+			return new Promise((resolve) => {
+				setTimeout(() => {
+					resolve('resolved');
+				}, 5000);
+			});
+		}
+	}
+}
+
 // used to make options for the <select> tag in Protocol table
 // later used to create the Step list in the Run page
 export let step_names = {
@@ -123,5 +145,6 @@ export let step_names = {
 	'Hamilton Transfer': HamiltonTransfer,
 	'Tuya Single Press': TuyaSinglePress,
 	'Tuya Double Press': TuyaDoublePress,
-	Wait: Wait
+	Wait: Wait,
+	Pause: Pause
 };

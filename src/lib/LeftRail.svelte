@@ -12,6 +12,9 @@
 	<AppRailAnchor href="/upload-xlsx" selected={$page.url.pathname === '/upload-xlsx'}
 		>Upload .xlsx</AppRailAnchor
 	>
+	<AppRailAnchor href="/download-xlsx" selected={$page.url.pathname === '/download-xlsx'}
+		>Download .xlsx</AppRailAnchor
+	>
 	<AppRailAnchor href="/protocol" selected={$page.url.pathname === '/protocol'}
 		>Protocol</AppRailAnchor
 	>

@@ -34,6 +34,8 @@
 
 	async function readTables() {
 		const arrayBuffer = await file.arrayBuffer();
+		// used for saving later
+		localStorage.setItem('filename', file.name);
 		const workbook = read(arrayBuffer);
 		workbook.SheetNames.forEach((tab) => {
 			const worksheet = workbook.Sheets[tab];

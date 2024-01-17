@@ -58,7 +58,7 @@
 				{#each row as cell, idx}
 					{#if columns[idx] in options}
 						<td
-							><select bind:value={cell} on:blur={() => updateTable(id)}>
+							><select class="select" bind:value={cell} on:blur={() => updateTable(id)}>
 								{#each options[columns[idx]] as option}
 									<option>{option}</option>
 								{/each}

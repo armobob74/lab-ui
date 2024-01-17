@@ -10,6 +10,31 @@
 		}
 	}
 
+	//function convertFormat(table) {
+	//	// table format is currently: {
+	//	//    columns:['A','B','C'],
+	//	//    data:[[1,2,3],[,4,5,6],...]
+	//	//}
+	//	// this function converts it to a format that can be saved
+	//}
+
+	function convertFormat(table) {
+		// Extract columns and data from the table
+		const { columns, data } = table;
+
+		// Map each row array in data to an object
+		// where the keys are column names
+		return data.map((row) => {
+			let rowObject = {};
+			columns.forEach((col, index) => {
+				// Use the column name as key
+				// If the row array is shorter than columns array, use undefined as value
+				rowObject[col] = row.length > index ? row[index] : undefined;
+			});
+			return rowObject;
+		});
+	}
+
 	function save() {
 		// Create a new workbook
 		const workbook = XLSX.utils.book_new();
@@ -17,7 +42,9 @@
 		// Iterate over each table in the tables object
 		Object.keys(tables).forEach((tabName) => {
 			const table = tables[tabName];
-			const worksheet = XLSX.utils.json_to_sheet(table.data, { header: table.columns });
+			const reformattedTable = convertFormat(table);
+			console.log(reformattedTable);
+			const worksheet = XLSX.utils.json_to_sheet(reformattedTable);
 			XLSX.utils.book_append_sheet(workbook, worksheet, tabName);
 		});
 

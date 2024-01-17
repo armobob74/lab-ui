@@ -33,6 +33,7 @@
 	}
 
 	async function readTables() {
+		clearTables();
 		const arrayBuffer = await file.arrayBuffer();
 		// used for saving later
 		localStorage.setItem('filename', file.name);
@@ -68,6 +69,14 @@
 			return tables;
 		});
 		messages = [...messages, { text: `Updated table: ${table_id}`, classList: classListSuccess }];
+	}
+
+	function clearTables() {
+		// clear all tables from tables_store
+		tables_store.update(() => {
+			return {};
+		});
+		messages = [...messages, { text: `Cleared tables`, classList: classListSuccess }];
 	}
 </script>
 

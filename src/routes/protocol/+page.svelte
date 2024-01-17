@@ -20,6 +20,7 @@
 	console.log(table_id);
 </script>
 
+<a href="/protocol/new" class="btn variant-filled">New Table</a>
 <TableIdSelect bind:table_id />
 <div class="p-2">
 	<Table id={table_id} {options} />

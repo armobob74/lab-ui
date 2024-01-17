@@ -76,6 +76,7 @@
 		tables_store.update(() => {
 			return {};
 		});
+		localStorage.removeItem('active-protocol');
 		messages = [...messages, { text: `Cleared tables`, classList: classListSuccess }];
 	}
 </script>

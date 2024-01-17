@@ -16,8 +16,8 @@
 		'Instrument Name': names,
 		Step: Object.keys(step_names)
 	};
-	let table_id;
-	console.log(table_id);
+	let table_id = localStorage.getItem('active-protocol') || undefined;
+	console.log('id', table_id);
 </script>
 
 <a href="/protocol/new" class="btn variant-filled">New Table</a>

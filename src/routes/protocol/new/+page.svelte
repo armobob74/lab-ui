@@ -30,7 +30,7 @@
 			};
 			return tables;
 		});
-		alert('Created new table!');
+		localStorage.setItem('active-protocol', tabname);
 		document.location.href = '/protocol';
 	}
 </script>

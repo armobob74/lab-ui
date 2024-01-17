@@ -15,9 +15,6 @@
 	<AppRailAnchor href="/protocol" selected={$page.url.pathname === '/protocol'}
 		>Protocol</AppRailAnchor
 	>
-	<AppRailAnchor href="/source-dest" selected={$page.url.pathname === '/source-dest'}
-		>SourceDest</AppRailAnchor
-	>
 	<AppRailAnchor href="/docs" selected={$page.url.pathname === '/docs'}>Docs</AppRailAnchor>
 	<AppRailAnchor href="/run-protocol" selected={$page.url.pathname === '/run-protocol'}
 		>Run Protocol</AppRailAnchor

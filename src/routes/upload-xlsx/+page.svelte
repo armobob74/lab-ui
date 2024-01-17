@@ -37,7 +37,7 @@
 		const workbook = read(arrayBuffer);
 		workbook.SheetNames.forEach((tab) => {
 			const worksheet = workbook.Sheets[tab];
-			const jsonData = utils.sheet_to_json(worksheet, { header: 1 });
+			const jsonData = utils.sheet_to_json(worksheet, { header: 1, blankrows: true });
 			const columns = jsonData[0];
 			const data = jsonData.slice(1);
 			data.forEach((row) => {

@@ -29,10 +29,13 @@
 </script>
 
 {#if columns.length === 0}
-	{#each data as row, idx}
-		<RunRow {row} run_trigger={run_triggers[idx]} on:rowCompleted={runNextRow} />
-		<hr />
-	{/each}
+	<div class="flex flex-col">
+		{#each data as row, idx}
+			<div class="flex flex-row">
+				<RunRow {row} run_trigger={run_triggers[idx]} on:rowCompleted={runNextRow} />
+			</div>
+		{/each}
+	</div>
 {:else}
 	<h2 class="text-error-500">Error: please select the main tab (this one has headers)</h2>
 {/if}

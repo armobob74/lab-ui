@@ -34,5 +34,5 @@
 		<hr />
 	{/each}
 {:else}
-	<h2 class="text-error-500">Error: first row is supposed to be blank</h2>
+	<h2 class="text-error-500">Error: please select the main tab (this one has headers)</h2>
 {/if}

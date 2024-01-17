@@ -38,8 +38,15 @@
 		workbook.SheetNames.forEach((tab) => {
 			const worksheet = workbook.Sheets[tab];
 			const jsonData = utils.sheet_to_json(worksheet, { header: 1, blankrows: true });
-			const columns = jsonData[0];
-			const data = jsonData.slice(1);
+			let columns;
+			let data;
+			if (tab === 'main') {
+				columns = [];
+				data = jsonData;
+			} else {
+				columns = jsonData[0];
+				data = jsonData.slice(1);
+			}
 			data.forEach((row) => {
 				while (row.length < columns.length) {
 					row.push(''); // Add a zero to the end of the row

@@ -32,6 +32,14 @@
 			return tables;
 		});
 	}
+	function updateTable(table) {
+		//sync the store with the data variable
+		//used when cell is changed
+		tables_store.update((tables) => {
+			tables[id].data = [...data];
+			return tables;
+		});
+	}
 	let newRow = Array(columns.length);
 </script>
 
@@ -50,14 +58,14 @@
 				{#each row as cell, idx}
 					{#if columns[idx] in options}
 						<td
-							><select bind:value={cell}>
+							><select bind:value={cell} on:blur={() => updateTable(id)}>
 								{#each options[columns[idx]] as option}
 									<option>{option}</option>
 								{/each}
 							</select></td
 						>
 					{:else}
-						<td contenteditable="true" bind:innerText={cell} />
+						<td contenteditable="true" bind:innerText={cell} on:blur={() => updateTable(id)} />
 					{/if}
 				{/each}
 				<button class="btn variant-filled" on:click={() => deleteRow(row)}>X</button>

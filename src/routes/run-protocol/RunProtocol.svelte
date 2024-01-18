@@ -26,7 +26,6 @@
 		// I am putting this code in here so that it doesn't trigger reactivity
 		// I only want the following reactivity block to be triggered by changes to table_id
 		// without this shield, it would also be triggered by changes to steps
-		console.log('reactivity');
 		table = all_tables[table_id];
 		steps = table.data.map((row) => {
 			let step_class = step_names[row[1]];
@@ -48,13 +47,15 @@
 	async function run() {
 		for (let i = 0; i < steps.length; i++) {
 			let step = steps[i];
-			console.log('running step', i);
 			step.is_active = true;
 			//trigger reactivity
 			steps = steps;
 			await step.action();
 			step.is_active = false;
 		}
+		// trigger reactivity again so that the last line
+		// does not stay green
+		steps = steps;
 	}
 	$: if (run_trigger) {
 		run().then(() => {

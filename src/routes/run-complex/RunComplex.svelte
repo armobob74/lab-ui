@@ -3,10 +3,12 @@
 	import RunRow from './RunRow.svelte';
 	export let table_id;
 	export let run_trigger;
+	import { createEventDispatcher } from 'svelte';
 	let data;
 	let columns;
 	let run_triggers;
-	let active_row_idx = 0;
+	let next_row_idx = 0;
+	let dispatch = createEventDispatcher();
 
 	$: if (table_id) {
 		tables_store.subscribe((tables) => {
@@ -19,10 +21,14 @@
 		});
 	}
 	function runNextRow() {
-		run_triggers[active_row_idx] = true;
-		active_row_idx += 1;
+		if (next_row_idx < run_triggers.length) {
+			console.log('running row', next_row_idx);
+			run_triggers[next_row_idx] = true;
+		} else {
+			dispatch('runCompleted');
+		}
+		next_row_idx += 1;
 	}
-
 	$: if (run_trigger) {
 		runNextRow();
 	}

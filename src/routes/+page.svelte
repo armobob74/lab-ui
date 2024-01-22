@@ -79,6 +79,7 @@
 				<option>SmartStageXY</option>
 				<option>DLIPower</option>
 				<option>HamiltonPump</option>
+				<option>NewEraPump</option>
 				<option>TuyaFingerBot</option>
 				<option>VirtualInstrument</option>
 			</select>

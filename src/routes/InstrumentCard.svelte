@@ -15,7 +15,8 @@
 		DLIPower: '[ DLI Power ]',
 		HamiltonPump: '[ Hamilton Pump ]',
 		TuyaFingerBot: '[ Tuya FingerBot ]',
-		VirtualInstrument: '[ Virtual Instrument ]'
+		VirtualInstrument: '[ Virtual Instrument ]',
+		NewEraPump: '[ New Era Pump ]'
 	};
 	function deleteCard() {
 		instruments_store.update((current_instruments) => {

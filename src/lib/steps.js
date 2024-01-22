@@ -98,6 +98,36 @@ class TuyaDoublePress extends Step {
 	}
 }
 
+class NEPull extends Step {
+	constructor(args_list) {
+		super(args_list);
+		this.port = args_list[0];
+		this.address = args_list[1];
+		this.vol = args_list[2];
+		this.rate = args_list[3];
+		this.url = `http://localhost:${this.port}/pman/pull`;
+	}
+	async action() {
+		// tell the pump to pull
+		return pmanPOST(this.url, [this.address, this.vol, this.rate]);
+	}
+}
+
+class NEPush extends Step {
+	constructor(args_list) {
+		super(args_list);
+		this.port = args_list[0];
+		this.address = args_list[1];
+		this.vol = args_list[2];
+		this.rate = args_list[3];
+		this.url = `http://localhost:${this.port}/pman/push`;
+	}
+	async action() {
+		// tell the pump to push
+		return pmanPOST(this.url, [this.address, this.vol, this.rate]);
+	}
+}
+
 class Wait extends Step {
 	constructor(args_list) {
 		//args_list format: [sec]
@@ -145,6 +175,8 @@ export let step_names = {
 	'Hamilton Transfer': HamiltonTransfer,
 	'Tuya Single Press': TuyaSinglePress,
 	'Tuya Double Press': TuyaDoublePress,
+	'NE Push': NEPush,
+	'NE Pull': NEPull,
 	Wait: Wait,
 	Pause: Pause
 };

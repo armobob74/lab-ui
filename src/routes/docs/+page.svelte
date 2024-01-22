@@ -86,6 +86,17 @@
 				</ol>
 			</svelte:fragment>
 		</AccordionItem>
+		<AccordionItem bind:open={openStates[6]}>
+			<svelte:fragment slot="summary">New Era Syringe Pump</svelte:fragment>
+			<svelte:fragment slot="content">
+				<ol>
+					<li>
+						<a href="/docs/new-era-syringe-pump/pull">pull [address, volume, rate]</a>
+						<a href="/docs/new-era-syringe-pump/push">push [address, volume, rate]</a>
+					</li>
+				</ol>
+			</svelte:fragment>
+		</AccordionItem>
 	</Accordion>
 
 	<h3 class="h3">Basics: Steps and Protocols</h3>

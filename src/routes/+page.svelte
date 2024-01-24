@@ -81,6 +81,7 @@
 				<option>HamiltonPump</option>
 				<option>NewEraPump</option>
 				<option>TuyaFingerBot</option>
+				<option>Elvesys</option>
 				<option>VirtualInstrument</option>
 			</select>
 			<label for="port">Port</label>

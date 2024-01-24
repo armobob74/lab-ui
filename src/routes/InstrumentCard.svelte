@@ -16,7 +16,8 @@
 		HamiltonPump: '[ Hamilton Pump ]',
 		TuyaFingerBot: '[ Tuya FingerBot ]',
 		VirtualInstrument: '[ Virtual Instrument ]',
-		NewEraPump: '[ New Era Pump ]'
+		NewEraPump: '[ New Era Pump ]',
+		Elvesys: '[ Elvesys ]'
 	};
 	function deleteCard() {
 		instruments_store.update((current_instruments) => {

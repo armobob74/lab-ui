@@ -70,6 +70,8 @@
 				<ol>
 					<li>
 						<a href="/docs/tuya-fingerbot/single-press">single-press []</a>
+					</li>
+					<li>
 						<a href="/docs/tuya-fingerbot/double-press">double-press [delay]</a>
 					</li>
 				</ol>
@@ -81,6 +83,8 @@
 				<ol>
 					<li>
 						<a href="/docs/virtual/pause">pause []</a>
+					</li>
+					<li>
 						<a href="/docs/virtual/wait">wait [seconds]</a>
 					</li>
 				</ol>
@@ -92,7 +96,30 @@
 				<ol>
 					<li>
 						<a href="/docs/new-era-syringe-pump/pull">pull [address, volume, rate]</a>
+					</li>
+					<li>
 						<a href="/docs/new-era-syringe-pump/push">push [address, volume, rate]</a>
+					</li>
+				</ol>
+			</svelte:fragment>
+		</AccordionItem>
+		<AccordionItem bind:open={openStates[7]}>
+			<svelte:fragment slot="summary">Elvesys</svelte:fragment>
+			<svelte:fragment slot="content">
+				<ol>
+					<li>
+						<a href="/docs/elvesys/mux">mux [serial_port, initial_state, desired_state]</a>
+					</li>
+					<li>
+						<a href="/docs/elvesys/dist"
+							>dist [serial_port,initial_set_valve_id, desired_set_valve_id]</a
+						>
+					</li>
+					<li>
+						<a href="/docs/elvesys/ob1">ob1 [serial_port,channel_to_initialize,pressure_to_set]</a>
+					</li>
+					<li>
+						<a href="/docs/elvesys/density-and-flow">density -and-flow[serial_port]</a>
 					</li>
 				</ol>
 			</svelte:fragment>
@@ -110,12 +137,34 @@
 	</p>
 	<h3 class="h3">Running Protocols</h3>
 	<p>
-		In addition to being run individually, protocols can be run sequentially or in parallel. This
-		functionality is currently in development.
+		In addition to being run individually, protocols can be run sequentially or in parallel. This is
+		done at the "Run Complex" tab. The format for this sheet is shown below:
+	</p>
+	<div class="flex justify-center">
+		<table class="table" style="width:60vw">
+			<tbody>
+				<tr>
+					<td>protocol_1</td>
+					<td>protocol_2</td>
+				</tr>
+				<tr>
+					<td>protocol_3</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<p>
+		Notice that there are no column headers. Each cell contains a protocol name. Protocols on the
+		same row are run in parallel. When all protocols on the row are completed, the runner moves to
+		the next row.
 	</p>
 </div>
 
 <style lang="scss">
+	h3 {
+		margin-top: 0.5em;
+		margin-bottom: 0.5em;
+	}
 	ol > li {
 		font-family: monospace;
 	}

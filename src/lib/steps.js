@@ -167,6 +167,62 @@ class Pause extends Step {
 	}
 }
 
+class ElvesysMux extends Step {
+	constructor(args_list) {
+		super(args_list);
+		this.port = args_list[0];
+		this.serial_port = args_list[1];
+		this.initial_state = args_list[2];
+		this.desired_state = args_list[3];
+		this.url = `http://localhost:${this.port}/pman/mux`;
+	}
+	async action() {
+		return pmanPOST(this.url, [this.serial_port, this.initial_state, this.desired_state]);
+	}
+}
+class ElvesysDist extends Step {
+	constructor(args_list) {
+		super(args_list);
+		this.port = args_list[0];
+		this.serial_port = args_list[1];
+		this.initial_set_valve_id = args_list[2];
+		this.desired_set_valve_id = args_list[3];
+		this.url = `http://localhost:${this.port}/pman/dist`;
+	}
+	async action() {
+		return pmanPOST(this.url, [
+			this.serial_port,
+			this.initial_set_valve_id,
+			this.desired_set_valve_id
+		]);
+	}
+}
+class ElvesysOB1 extends Step {
+	constructor(args_list) {
+		super(args_list);
+		this.port = args_list[0];
+		this.serial_port = args_list[1];
+		this.channel_to_initialize = args_list[2];
+		this.pressure_to_set = args_list[3];
+		this.url = `http://localhost:${this.port}/pman/ob1`;
+	}
+	async action() {
+		return pmanPOST(this.url, [this.serial_port, this.channel_to_initialize, this.pressure_to_set]);
+	}
+}
+class ElvesysFlowmeter extends Step {
+	constructor(args_list) {
+		super(args_list);
+		this.port = args_list[0];
+		this.serial_port = args_list[1];
+		this.url = `http://localhost:${this.port}/pman/dist/${this.serial_port}`;
+	}
+	async action() {
+		// this one's just a GET request
+		return fetch(this.url);
+	}
+}
+
 // used to make options for the <select> tag in Protocol table
 // later used to create the Step list in the Run page
 export let step_names = {
@@ -178,5 +234,9 @@ export let step_names = {
 	'NE Push': NEPush,
 	'NE Pull': NEPull,
 	Wait: Wait,
-	Pause: Pause
+	Pause: Pause,
+	'Elvesys Mux': ElvesysMux,
+	'Elvesys Dist': ElvesysDist,
+	'Elvesys OB1': ElvesysOB1,
+	'Elvesys Flowmeter': ElvesysFlowmeter
 };

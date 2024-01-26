@@ -12,8 +12,8 @@
 	<ArgsDoc>
 		<svelte:fragment slot="dl">
 			<dl class="custom-dl">
-				<dt>serial_port</dt>
-				<dd>The port that the meter is attached to, e.g. COM30</dd>
+				<dt>device_name</dt>
+				<dd>The name of the Elvesys device that we wish to control</dd>
 			</dl>
 		</svelte:fragment>
 	</ArgsDoc>

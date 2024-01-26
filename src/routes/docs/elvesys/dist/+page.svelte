@@ -11,8 +11,8 @@
 	<ArgsDoc>
 		<svelte:fragment slot="dl">
 			<dl class="custom-dl">
-				<dt>serial_port</dt>
-				<dd>The port that the distributor is attached to, e.g. COM30</dd>
+				<dt>device_name</dt>
+				<dd>The name of the Elvesys device that we wish to control</dd>
 				<dt>initial_set_valve_id</dt>
 				<dd>The ID of the valve that the distrbutor is initially set to.</dd>
 				<dt>desired_set_valve_id</dt>

@@ -8,8 +8,8 @@
 	<ArgsDoc>
 		<svelte:fragment slot="dl">
 			<dl class="custom-dl">
-				<dt>serial_port</dt>
-				<dd>The port that the mux is attached to, e.g. COM30</dd>
+				<dt>device_name</dt>
+				<dd>The name of the Elvesys device that we wish to control</dd>
 				<dt>initial_state</dt>
 				<dd>
 					Mux immediately set to this. It's a sequence of 8 integer booleans. 0 means off and 1

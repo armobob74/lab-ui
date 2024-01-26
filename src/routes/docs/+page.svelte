@@ -108,18 +108,18 @@
 			<svelte:fragment slot="content">
 				<ol>
 					<li>
-						<a href="/docs/elvesys/mux">mux [serial_port, initial_state, desired_state]</a>
+						<a href="/docs/elvesys/mux">mux [device_name, initial_state, desired_state]</a>
 					</li>
 					<li>
 						<a href="/docs/elvesys/dist"
-							>dist [serial_port,initial_set_valve_id, desired_set_valve_id]</a
+							>dist [device_name,initial_set_valve_id, desired_set_valve_id]</a
 						>
 					</li>
 					<li>
-						<a href="/docs/elvesys/ob1">ob1 [serial_port,channel_to_initialize,pressure_to_set]</a>
+						<a href="/docs/elvesys/ob1">ob1 [device_name,channel_to_initialize,pressure_to_set]</a>
 					</li>
 					<li>
-						<a href="/docs/elvesys/density-and-flow">density -and-flow[serial_port]</a>
+						<a href="/docs/elvesys/density-and-flow">density -and-flow[device_name]</a>
 					</li>
 				</ol>
 			</svelte:fragment>

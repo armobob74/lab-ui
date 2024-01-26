@@ -8,8 +8,8 @@
 	<ArgsDoc>
 		<svelte:fragment slot="dl">
 			<dl class="custom-dl">
-				<dt>serial_port</dt>
-				<dd />
+				<dt>device_name</dt>
+				<dd>The name of the Elvesys device that we wish to control</dd>
 				<dt>channel_to_initialize</dt>
 				<dd />
 				<dt>pressure_to_set</dt>

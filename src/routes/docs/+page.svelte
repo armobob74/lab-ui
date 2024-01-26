@@ -82,7 +82,7 @@
 			<svelte:fragment slot="content">
 				<ol>
 					<li>
-						<a href="/docs/virtual/pause">pause []</a>
+						<a href="/docs/virtual/confirm">confirm []</a>
 					</li>
 					<li>
 						<a href="/docs/virtual/wait">wait [seconds]</a>

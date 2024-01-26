@@ -145,7 +145,7 @@ class Wait extends Step {
 	}
 }
 
-class Pause extends Step {
+class Confirm extends Step {
 	constructor(args_list) {
 		//args_list format: [sec]
 		super(args_list);
@@ -234,7 +234,7 @@ export let step_names = {
 	'NE Push': NEPush,
 	'NE Pull': NEPull,
 	Wait: Wait,
-	Pause: Pause,
+	Confirm: Confirm,
 	'Elvesys Mux': ElvesysMux,
 	'Elvesys Dist': ElvesysDist,
 	'Elvesys OB1': ElvesysOB1,

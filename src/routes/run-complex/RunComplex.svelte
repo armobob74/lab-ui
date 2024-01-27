@@ -23,6 +23,10 @@
 	function runNextRow() {
 		if (next_row_idx < run_triggers.length) {
 			console.log('running row', next_row_idx);
+
+			if (next_row_idx > 0) {
+				run_triggers[next_row_idx - 1] = false;
+			}
 			run_triggers[next_row_idx] = true;
 		} else {
 			dispatch('runCompleted');

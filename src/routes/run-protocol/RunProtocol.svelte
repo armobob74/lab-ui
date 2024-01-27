@@ -4,6 +4,7 @@
 	import { step_names } from '$lib/steps.js';
 	export let table_id;
 	export let run_trigger = false; //if set to true by parent, run begins
+	export let stop_flag = false;
 	let all_tables;
 	let table;
 	let steps = [];
@@ -33,10 +34,10 @@
 				return ins.name == row[0];
 			});
 			// args does not include port num
-			let args_string = `[${row[2]}]`
-			let args = JSON.parse(args_string)
-			console.log(args_string)
-			console.log(args)
+			let args_string = `[${row[2]}]`;
+			let args = JSON.parse(args_string);
+			console.log(args_string);
+			console.log(args);
 			// args_list actually goes to the Step object
 			let args_list = [instrument.port].concat(args);
 			let step = new step_class((args_list = args_list));
@@ -53,6 +54,10 @@
 			step.is_active = true;
 			//trigger reactivity
 			steps = steps;
+			while (stop_flag) {
+				await new Promise((resolve) => setTimeout(resolve, 500)); // Pause for 0.5 sec
+				// wait for stop_flag to be set to false
+			}
 			await step.action();
 			step.is_active = false;
 		}
@@ -63,9 +68,22 @@
 	$: if (run_trigger) {
 		run().then(() => {
 			dispatch('runCompleted');
+			//setting back to false makes the stop buttons disappear
+			run_trigger = false;
 		});
 	}
 </script>
+
+<div>
+	{#if run_trigger}
+		{#if stop_flag}
+			<button on:click={() => (stop_flag = false)} class="btn variant-filled-primary">RESUME</button
+			>
+		{:else}
+			<button on:click={() => (stop_flag = true)} class="btn variant-filled-warning">STOP</button>
+		{/if}
+	{/if}
+</div>
 
 <table class="table m-4" style="background:none">
 	<tr>

@@ -35,9 +35,12 @@
 			});
 			// args does not include port num
 			let args_string = `[${row[2]}]`;
-			let args = JSON.parse(args_string);
-			console.log(args_string);
-			console.log(args);
+			let args ;
+			try {
+				args = JSON.parse(args_string);
+			} catch(SyntaxError){
+				args =[0,"Invalid Format"]
+			}
 			// args_list actually goes to the Step object
 			let args_list = [instrument.port].concat(args);
 			let step = new step_class((args_list = args_list));

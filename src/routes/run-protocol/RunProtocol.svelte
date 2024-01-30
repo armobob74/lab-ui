@@ -98,24 +98,28 @@
 </div>
 
 <table class="table m-4" style="background:none">
-	<tr>
-		<th>Instrument</th>
-		<th>Step</th>
-	</tr>
-	{#each steps as step}
-		<tr class={step.is_active ? 'text-primary-500' : ''}>
-			<td>{step.instrument_name}</td>
-			<td>
-				{step.name}(
-				{#if step.args_list.includes(INVALID_FORMAT_LABEL)}
-					<span class="text-error-500">BAD FORMAT</span>
-				{:else}
-					<span>{step.args_list.slice(1)}</span>
-				{/if}
-				)
-			</td>
+	<thead>
+		<tr>
+			<th>Instrument</th>
+			<th>Step</th>
 		</tr>
-	{/each}
+	</thead>
+	<tbody>
+		{#each steps as step}
+			<tr class={step.is_active ? 'text-primary-500' : ''}>
+				<td>{step.instrument_name}</td>
+				<td>
+					{step.name}(
+					{#if step.args_list.includes(INVALID_FORMAT_LABEL)}
+						<span class="text-error-500">BAD FORMAT</span>
+					{:else}
+						<span>{step.args_list.slice(1)}</span>
+					{/if}
+					)
+				</td>
+			</tr>
+		{/each}
+	</tbody>
 </table>
 
 <style>

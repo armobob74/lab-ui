@@ -110,7 +110,7 @@
 				{#if step.args_list.includes(INVALID_FORMAT_LABEL)}
 					<span class="text-error-500">BAD FORMAT</span>
 				{:else}
-					<span>{step.args_list}</span>
+					<span>{step.args_list.slice(1)}</span>
 				{/if}
 				)
 			</td>

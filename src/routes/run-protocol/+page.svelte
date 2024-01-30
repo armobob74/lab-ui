@@ -17,7 +17,12 @@
 	}
 </script>
 
-<TableIdSelect bind:table_id />
+<TableIdSelect
+	bind:table_id
+	includeCondition={(option) => {
+		return option !== 'main';
+	}}
+/>
 <RunProtocol bind:invalid_format_flag {table_id} {run_trigger} on:runCompleted={handleCompletion} />
 
 {#if !invalid_format_flag}

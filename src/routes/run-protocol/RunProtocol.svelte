@@ -50,6 +50,8 @@
 			// args_list actually goes to the Step object
 			let args_list = [instrument.port].concat(args);
 			let step = new step_class((args_list = args_list));
+			step.instrument_name = instrument.name;
+			step.name = row[1];
 			return step;
 		});
 	}
@@ -97,17 +99,21 @@
 
 <table class="table m-4" style="background:none">
 	<tr>
-		<th>URL</th>
-		<th>Args</th>
+		<th>Instrument</th>
+		<th>Step</th>
 	</tr>
 	{#each steps as step}
 		<tr class={step.is_active ? 'text-primary-500' : ''}>
-			<td> {step.url} </td>
-			{#if step.args_list.includes(INVALID_FORMAT_LABEL)}
-				<td class="text-error-500">BAD FORMAT</td>
-			{:else}
-				<td> {step.args_list} </td>
-			{/if}
+			<td>{step.instrument_name}</td>
+			<td>
+				{step.name}(
+				{#if step.args_list.includes(INVALID_FORMAT_LABEL)}
+					<span class="text-error-500">BAD FORMAT</span>
+				{:else}
+					<span>{step.args_list}</span>
+				{/if}
+				)
+			</td>
 		</tr>
 	{/each}
 </table>

@@ -10,6 +10,11 @@
 	let steps = [];
 	let instruments;
 
+	const INVALID_FORMAT_LABEL = 'BAD FORMAT'; // used to indicate that user needs to change args
+	// disables run button if an arg is invalid
+	// I already tried dispatching events, but that didn't work out
+	// so have parents listen directly to this flag
+	export let invalid_format_flag = false;
 	const dispatch = createEventDispatcher();
 
 	// instruments_store is used to translate name to port
@@ -35,11 +40,12 @@
 			});
 			// args does not include port num
 			let args_string = `[${row[2]}]`;
-			let args ;
+			let args;
 			try {
 				args = JSON.parse(args_string);
-			} catch(SyntaxError){
-				args =[0,"Invalid Format"]
+			} catch (SyntaxError) {
+				args = [INVALID_FORMAT_LABEL];
+				invalid_format_flag = true;
 			}
 			// args_list actually goes to the Step object
 			let args_list = [instrument.port].concat(args);
@@ -68,6 +74,7 @@
 		// does not stay green
 		steps = steps;
 	}
+
 	$: if (run_trigger) {
 		run().then(() => {
 			dispatch('runCompleted');
@@ -96,7 +103,11 @@
 	{#each steps as step}
 		<tr class={step.is_active ? 'text-primary-500' : ''}>
 			<td> {step.url} </td>
-			<td> {step.args_list} </td>
+			{#if step.args_list.includes(INVALID_FORMAT_LABEL)}
+				<td class="text-error-500">BAD FORMAT</td>
+			{:else}
+				<td> {step.args_list} </td>
+			{/if}
 		</tr>
 	{/each}
 </table>

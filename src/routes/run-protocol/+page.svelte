@@ -4,6 +4,7 @@
 
 	let table_id;
 	let run_trigger = false;
+	let invalid_format_flag = false;
 
 	async function run() {
 		//trigger the run function of the RunProtocol child
@@ -17,9 +18,13 @@
 </script>
 
 <TableIdSelect bind:table_id />
-<RunProtocol {table_id} {run_trigger} on:runCompleted={handleCompletion} />
+<RunProtocol bind:invalid_format_flag {table_id} {run_trigger} on:runCompleted={handleCompletion} />
 
-<button class="btn variant-filled" type="button" on:click={run}>Run</button>
+{#if !invalid_format_flag}
+	<button class="btn variant-filled" type="button" on:click={run}>Run</button>
+{:else}
+	<button class="btn variant-filled" type="button" disabled>Invalid Args</button>
+{/if}
 
 <style>
 	th {

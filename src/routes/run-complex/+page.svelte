@@ -6,6 +6,7 @@
 	let run_trigger = false;
 	let run_in_progress = false;
 	let run_completed = false;
+	let invalid_format_flag = false;
 	async function run() {
 		//trigger the run function of the RunComplex child
 		run_trigger = true;
@@ -20,9 +21,11 @@
 </script>
 
 <TableIdSelect bind:table_id />
-<RunComplex {table_id} {run_trigger} on:runCompleted={handleCompletion} />
+<RunComplex bind:invalid_format_flag {table_id} {run_trigger} on:runCompleted={handleCompletion} />
 
-{#if run_in_progress}
+{#if invalid_format_flag}
+	<button disabled class="btn variant-filled" type="button">Invalid Args</button>
+{:else if run_in_progress}
 	<button disabled="true" class="btn variant-filled" type="button" on:click={run}>running</button>
 {:else if run_completed}
 	<button class="btn variant-filled" type="button" on:click={() => document.location.reload()}

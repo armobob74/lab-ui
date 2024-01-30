@@ -3,8 +3,10 @@
 	import RunProtocol from '../run-protocol/RunProtocol.svelte';
 	export let row;
 	export let run_trigger = false;
+	export let invalid_format_flag = false;
 	let stop_flags = Array(row.length).fill(false);
 	let unfinished_protocols;
+
 	const dispatch = createEventDispatcher();
 	$: if (row) {
 		unfinished_protocols = row.length;
@@ -34,6 +36,7 @@
 		{table_id}
 		{run_trigger}
 		bind:stop_flag={stop_flags[i]}
+		bind:invalid_format_flag
 		on:runCompleted={handleCompletion}
 	/>
 {/each}

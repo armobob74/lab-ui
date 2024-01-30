@@ -3,6 +3,7 @@
 	import RunRow from './RunRow.svelte';
 	export let table_id;
 	export let run_trigger;
+	export let invalid_format_flag = false;
 	import { createEventDispatcher } from 'svelte';
 	let data;
 	let columns;
@@ -42,7 +43,12 @@
 	<div class="flex flex-col">
 		{#each data as row, idx}
 			<div class="flex flex-row">
-				<RunRow {row} run_trigger={run_triggers[idx]} on:rowCompleted={runNextRow} />
+				<RunRow
+					{row}
+					run_trigger={run_triggers[idx]}
+					on:rowCompleted={runNextRow}
+					bind:invalid_format_flag
+				/>
 			</div>
 		{/each}
 	</div>

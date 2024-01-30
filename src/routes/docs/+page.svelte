@@ -135,7 +135,13 @@
 		<a href="/docs/examples/protocol-table">here</a>. And to run an individual protocol table, go to
 		the <a href="/run-protocol">run protocol</a> tab.
 	</p>
-	<h3 class="h3">Running Protocols</h3>
+	<h4 class="h4 my-4">Arg Format</h4>
+	<p>
+		The <code class="code">Args</code> column is basically processed as a JSON list, with the cell walls
+		acting as the externalmost brackets. Format your arguments accordingly, for example using double
+		quotes to denote strings.
+	</p>
+	<h4 class="h4 my-4">Running Protocols</h4>
 	<p>
 		In addition to being run individually, protocols can be run sequentially or in parallel. This is
 		done at the "Run Complex" tab. The format for this sheet is shown below:

@@ -6,17 +6,17 @@
 		<th>Args</th>
 	</tr>
 	<tr>
-		<td>SPM1</td>
+		<td>SPM5003</td>
 		<td>SPM Transfer</td>
 		<td>5,11,5</td>
 	</tr>
 	<tr>
-		<td>FingerBot</td>
-		<td>TuyaSinglePress</td>
-		<td />
+		<td>Elvesys</td>
+		<td>Elvesys Mux</td>
+		<td>"TH",[0,0,0,0,0,0,0,0],[0,0,1,0,0,0,0,0]</td>
 	</tr>
 	<tr>
-		<td>SPM1</td>
+		<td>SPM5004</td>
 		<td>SPM Transfer</td>
 		<td>2,11,50</td>
 	</tr>

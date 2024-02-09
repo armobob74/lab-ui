@@ -83,6 +83,7 @@
 				<option>TuyaFingerBot</option>
 				<option>Elvesys</option>
 				<option>VirtualInstrument</option>
+				<option>AuroraValve</option>
 			</select>
 			<label for="port">Port</label>
 			<input bind:value={newInstrument.port} type="text" class="input p-3" name="port" />

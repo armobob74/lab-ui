@@ -223,6 +223,18 @@ class ElvesysFlowmeter extends Step {
 	}
 }
 
+class AuroraValveSwitchPort extends Step {
+	constructor(args_list) {
+		super(args_list);
+		this.name = args_list[0];
+		this.to_port = args_list[1];
+		this.url = `http://localhost:${this.name}/pman/aurora-valve/switch-to-port`;
+	}
+	async action() {
+		return pmanPOST(this.url, [this.to_port]);
+	}
+}
+
 // used to make options for the <select> tag in Protocol table
 // later used to create the Step list in the Run page
 export let step_names = {
@@ -238,5 +250,6 @@ export let step_names = {
 	'Elvesys Mux': ElvesysMux,
 	'Elvesys Dist': ElvesysDist,
 	'Elvesys OB1': ElvesysOB1,
-	'Elvesys Flowmeter': ElvesysFlowmeter
+	'Elvesys Flowmeter': ElvesysFlowmeter,
+	'Aurora Switch Port': AuroraValveSwitchPort
 };

@@ -1,4 +1,4 @@
-import { pmanPOST } from '$lib/general_fetches.js';
+import { pmanPOST, fetchPOST } from '$lib/general_fetches.js';
 class Step {
 	constructor(args_list = []) {
 		// the list of args required for the step
@@ -23,6 +23,22 @@ class HamiltonTransfer extends Step {
 		this.vol = args_list[3];
 		this.url = `http://localhost:${this.port}/pman/transfer`;
 		this.url_2 = `http://localhost:${this.port}/pman/listen`;
+		this.url_3 = `http://localhost:${this.port}/pman/buffer-is-empty`;
+	}
+	async bufferIsEmpty() {
+		return parseInt(await fetchPOST(this.url_3));
+	}
+	async listen() {
+		// listen until the end of the command buffer
+		let args = [];
+		if (await this.bufferIsEmpty()) {
+			return '';
+		}
+		let response = await pmanPOST(this.url_2, args);
+		while (!(await this.bufferIsEmpty())) {
+			response = await pmanPOST(this.url_2, args);
+		}
+		return response;
 	}
 	async action() {
 		// sends a request to server to begin transfer
@@ -32,9 +48,8 @@ class HamiltonTransfer extends Step {
 			this.to_port,
 			this.vol
 		]);
-		// now tell server to listen for the second response,
-		// which indicates that the transfer has finished
-		return pmanPOST(this.url_2, []);
+		// now tell server to listen until command buffer is empty
+		return this.listen();
 	}
 }
 class SPM_Transfer extends Step {

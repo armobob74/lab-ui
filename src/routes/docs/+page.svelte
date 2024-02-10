@@ -119,7 +119,17 @@
 						<a href="/docs/elvesys/ob1">ob1 [device_name,channel_to_initialize,pressure_to_set]</a>
 					</li>
 					<li>
-						<a href="/docs/elvesys/density-and-flow">density -and-flow[device_name]</a>
+						<a href="/docs/elvesys/density-and-flow">density-and-flow[device_name]</a>
+					</li>
+				</ol>
+			</svelte:fragment>
+		</AccordionItem>
+		<AccordionItem bind:open={openStates[8]}>
+			<svelte:fragment slot="summary">Aurora Valve</svelte:fragment>
+			<svelte:fragment slot="content">
+				<ol>
+					<li>
+						<a href="/docs/aurora-valve/switch-to-port"> switch-to-port [port_number]</a>
 					</li>
 				</ol>
 			</svelte:fragment>

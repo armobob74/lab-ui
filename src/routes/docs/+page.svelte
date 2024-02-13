@@ -150,6 +150,9 @@
 					<li>
 						<a href="/docs/aurora-pump/push"> push [volume]</a>
 					</li>
+					<li>
+						<a href="/docs/aurora-pump/set-velocity"> set-velocity [velocity (mL/min)]</a>
+					</li>
 				</ol>
 			</svelte:fragment>
 		</AccordionItem>

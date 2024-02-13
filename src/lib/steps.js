@@ -7,6 +7,10 @@ class Step {
 
 		// used by the runner display
 		this.is_active = false;
+
+		// used to create the steps dropdown in the protocol writer
+		// all steps that do not match the selected instrument are filtered out
+		this.instrument_type = '';
 	}
 	async action() {
 		console.log('Please overwrite me, inheritor!');
@@ -17,6 +21,7 @@ class HamiltonTransfer extends Step {
 	constructor(args_list) {
 		//args_list format: ['port', 'from_port', 'to_port', 'vol']
 		super(args_list);
+		this.instrument_type = 'HamiltonPump';
 		this.port = args_list[0];
 		this.from_port = args_list[1];
 		this.to_port = args_list[2];
@@ -56,6 +61,7 @@ class SPM_Transfer extends Step {
 	constructor(args_list) {
 		//args_list format: ['port', 'from_port', 'to_port', 'vol']
 		super(args_list);
+		this.instrument_type = 'SPM';
 		this.port = args_list[0];
 		this.from_port = args_list[1];
 		this.to_port = args_list[2];
@@ -74,6 +80,7 @@ class DLIPowerSwitch extends Step {
 	constructor(args_list) {
 		//args_list format: [port, button_name,on/off]
 		super(args_list);
+		this.instrument_type = 'DLIPower';
 		this.port = args_list[0];
 		this.button_name = args_list[1];
 		this.on_or_off = args_list[2];
@@ -88,6 +95,7 @@ class TuyaSinglePress extends Step {
 	constructor(args_list) {
 		//args_list format: [port]
 		super(args_list);
+		this.instrument_type = 'TuyaFingerBot';
 		this.port = args_list[0];
 		this.url = `http://localhost:${this.port}/pman/single-press`;
 	}
@@ -101,6 +109,7 @@ class TuyaDoublePress extends Step {
 	constructor(args_list) {
 		//args_list format: [port, delay_sec]
 		super(args_list);
+		this.instrument_type = 'TuyaFingerBot';
 		this.port = args_list[0];
 		this.delay_sec = args_list[1];
 		this.url = `http://localhost:${this.port}/pman/double-press`;
@@ -116,6 +125,7 @@ class TuyaDoublePress extends Step {
 class NEPull extends Step {
 	constructor(args_list) {
 		super(args_list);
+		this.instrument_type = 'NewEraPump';
 		this.port = args_list[0];
 		this.address = args_list[1];
 		this.vol = args_list[2];
@@ -131,6 +141,7 @@ class NEPull extends Step {
 class NEPush extends Step {
 	constructor(args_list) {
 		super(args_list);
+		this.instrument_type = 'NewEraPump';
 		this.port = args_list[0];
 		this.address = args_list[1];
 		this.vol = args_list[2];
@@ -147,6 +158,7 @@ class Wait extends Step {
 	constructor(args_list) {
 		//args_list format: [sec]
 		super(args_list);
+		this.instrument_type = 'VirtualInstrument';
 		this.sec = args_list[1];
 		this.url = `N/A`;
 	}
@@ -164,6 +176,7 @@ class Confirm extends Step {
 	constructor(args_list) {
 		//args_list format: [sec]
 		super(args_list);
+		this.instrument_type = 'VirtualInstrument';
 		this.url = `N/A`;
 	}
 	async action() {
@@ -185,6 +198,7 @@ class Confirm extends Step {
 class ElvesysMux extends Step {
 	constructor(args_list) {
 		super(args_list);
+		this.instrument_type = 'Elvesys';
 		this.name = args_list[0];
 		this.device_name = args_list[1];
 		this.initial_state = args_list[2];
@@ -198,6 +212,7 @@ class ElvesysMux extends Step {
 class ElvesysDist extends Step {
 	constructor(args_list) {
 		super(args_list);
+		this.instrument_type = 'Elvesys';
 		this.name = args_list[0];
 		this.device_name = args_list[1];
 		this.initial_set_valve_id = args_list[2];
@@ -215,6 +230,7 @@ class ElvesysDist extends Step {
 class ElvesysOB1 extends Step {
 	constructor(args_list) {
 		super(args_list);
+		this.instrument_type = 'Elvesys';
 		this.name = args_list[0];
 		this.device_name = args_list[1];
 		this.channel_to_initialize = args_list[2];
@@ -228,6 +244,7 @@ class ElvesysOB1 extends Step {
 class ElvesysFlowmeter extends Step {
 	constructor(args_list) {
 		super(args_list);
+		this.instrument_type = 'Elvesys';
 		this.name = args_list[0];
 		this.device_name = args_list[1];
 		this.url = `http://localhost:${this.name}/pman/dist/${this.device_name}`;
@@ -241,6 +258,7 @@ class ElvesysFlowmeter extends Step {
 class AuroraValveSwitchPort extends Step {
 	constructor(args_list) {
 		super(args_list);
+		this.instrument_type = 'AuroraValve';
 		this.name = args_list[0];
 		this.to_port = args_list[1];
 		this.url = `http://localhost:${this.name}/pman/aurora-valve/switch-to-port`;
@@ -255,6 +273,7 @@ class AuroraPumpStep extends Step {
 	// not directly used in UI
 	constructor(args_list) {
 		super(args_list);
+		this.instrument_type = 'AuroraPump';
 		this.port = args_list[0];
 		this.listen_url = `http://localhost:${this.port}/pman/aurora-pump/is-busy`;
 	}

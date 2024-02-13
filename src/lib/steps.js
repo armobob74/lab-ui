@@ -284,6 +284,54 @@ class AuroraPumpTransfer extends AuroraPumpStep {
 		return this.waitForEnd();
 	}
 }
+
+class AuroraPumpSwitchPort extends AuroraPumpStep {
+	constructor(args_list) {
+		super(args_list);
+		this.valve_port = args_list[1];
+		this.url = `http://localhost:${this.port}/pman/aurora-pump/switch-to-port`;
+	}
+	async action() {
+		await pmanPOST(this.url, [this.valve_port]);
+		return this.waitForEnd();
+	}
+}
+
+class AuroraPumpPull extends AuroraPumpStep {
+	constructor(args_list) {
+		super(args_list);
+		this.volume = args_list[1];
+		this.url = `http://localhost:${this.port}/pman/aurora-pump/pull`;
+	}
+	async action() {
+		await pmanPOST(this.url, [this.volume]);
+		return this.waitForEnd();
+	}
+}
+
+class AuroraPumpPush extends AuroraPumpStep {
+	constructor(args_list) {
+		super(args_list);
+		this.volume = args_list[1];
+		this.url = `http://localhost:${this.port}/pman/aurora-pump/push`;
+	}
+	async action() {
+		await pmanPOST(this.url, [this.volume]);
+		return this.waitForEnd();
+	}
+}
+
+class AuroraPumpSetVelocity extends AuroraPumpStep {
+	constructor(args_list) {
+		super(args_list);
+		this.velocity = args_list[1];
+		this.url = `http://localhost:${this.port}/pman/aurora-pump/set-velocity`;
+	}
+	async action() {
+		await pmanPOST(this.url, [this.velocity]);
+		return this.waitForEnd();
+	}
+}
 // used to make options for the <select> tag in Protocol table
 // later used to create the Step list in the Run page
 export let step_names = {
@@ -301,5 +349,9 @@ export let step_names = {
 	'Elvesys OB1': ElvesysOB1,
 	'Elvesys Flowmeter': ElvesysFlowmeter,
 	'Aurora Switch Port': AuroraValveSwitchPort,
-	'Aurora Pump Transfer': AuroraPumpTransfer
+	'Aurora Pump Transfer': AuroraPumpTransfer,
+	'Aurora Pump Switch Port': AuroraPumpSwitchPort,
+	'Aurora Pump Pull': AuroraPumpPull,
+	'Aurora Pump Push': AuroraPumpPush,
+	'Aurora Pump Set Velocity': AuroraPumpSetVelocity
 };

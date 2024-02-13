@@ -250,6 +250,40 @@ class AuroraValveSwitchPort extends Step {
 	}
 }
 
+class AuroraPumpStep extends Step {
+	// all inheritors will use AuroraPump's polling function
+	// not directly used in UI
+	constructor(args_list) {
+		super(args_list);
+		this.port = args_list[0];
+		this.listen_url = `http://localhost:${this.port}/pman/aurora-pump/is-busy`;
+	}
+	async waitForEnd() {
+		let stat = true;
+		let response;
+		while (stat == true) {
+			await new Promise((resolve) => setTimeout(resolve, 500)); // sleep for 0.5 seconds
+			response = await pmanPOST(this.listen_url, []);
+			response = JSON.parse(response);
+			stat = response['status'];
+		}
+		return null;
+	}
+}
+
+class AuroraPumpTransfer extends AuroraPumpStep {
+	constructor(args_list) {
+		super(args_list);
+		this.from_port = args_list[1];
+		this.to_port = args_list[2];
+		this.volume = args_list[3];
+		this.url = `http://localhost:${this.port}/pman/aurora-pump/transfer`;
+	}
+	async action() {
+		await pmanPOST(this.url, [this.from_port, this.to_port, this.volume]);
+		return this.waitForEnd();
+	}
+}
 // used to make options for the <select> tag in Protocol table
 // later used to create the Step list in the Run page
 export let step_names = {
@@ -266,5 +300,6 @@ export let step_names = {
 	'Elvesys Dist': ElvesysDist,
 	'Elvesys OB1': ElvesysOB1,
 	'Elvesys Flowmeter': ElvesysFlowmeter,
-	'Aurora Switch Port': AuroraValveSwitchPort
+	'Aurora Switch Port': AuroraValveSwitchPort,
+	'Aurora Pump Transfer': AuroraPumpTransfer
 };

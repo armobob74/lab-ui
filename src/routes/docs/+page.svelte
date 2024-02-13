@@ -134,6 +134,25 @@
 				</ol>
 			</svelte:fragment>
 		</AccordionItem>
+		<AccordionItem bind:open={openStates[9]}>
+			<svelte:fragment slot="summary">Aurora Pump</svelte:fragment>
+			<svelte:fragment slot="content">
+				<ol>
+					<li>
+						<a href="/docs/aurora-pump/transfer"> transfer [from_port, to_port, volume]</a>
+					</li>
+					<li>
+						<a href="/docs/aurora-pump/switch-to-port"> switch-to-port [port_number]</a>
+					</li>
+					<li>
+						<a href="/docs/aurora-pump/pull"> pull [volume]</a>
+					</li>
+					<li>
+						<a href="/docs/aurora-pump/push"> push [volume]</a>
+					</li>
+				</ol>
+			</svelte:fragment>
+		</AccordionItem>
 	</Accordion>
 
 	<h3 class="h3">Basics: Steps and Protocols</h3>

@@ -18,7 +18,8 @@
 		VirtualInstrument: '[ Virtual Instrument ]',
 		NewEraPump: '[ New Era Pump ]',
 		Elvesys: '[ Elvesys ]',
-		AuroraValve: '[ Aurora Valve ]'
+		AuroraValve: '[ Aurora Valve ]',
+		AuroraPump: '[ Aurora Pump ]'
 	};
 	function deleteCard() {
 		instruments_store.update((current_instruments) => {

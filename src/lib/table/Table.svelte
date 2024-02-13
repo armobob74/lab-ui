@@ -8,6 +8,7 @@
 		['0003', 'Potato', '34']
 	];
 	export let options = {};
+	export let filtered_options = {};
 	let table;
 
 	$: if (id) {
@@ -64,6 +65,16 @@
 								{/each}
 							</select></td
 						>
+					{:else if columns[idx] in filtered_options}
+						{@const [row_input, optionsFunction] = filtered_options[columns[idx]]}
+						{@const options = optionsFunction(row[row_input])}
+						<td>
+							<select class="select" bind:value={cell} on:blur={() => updateTable(id)}>
+								{#each options as option, idx}
+									<option>{option}</option>
+								{/each}
+							</select>
+						</td>
 					{:else}
 						<td contenteditable="true" bind:innerText={cell} on:blur={() => updateTable(id)} />
 					{/if}

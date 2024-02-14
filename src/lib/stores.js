@@ -14,3 +14,12 @@ export const tables_store = localStorageStore('tables', {
 	//	data: []
 	//}
 });
+
+export const actions_store = localStorageStore('actions', [
+	{
+		action_title: 'Delay 6',
+		action_url: 'https://httpbin.org/delay/6',
+		request_method: 'POST',
+		request_args: []
+	}
+]);

@@ -17,8 +17,8 @@ export const tables_store = localStorageStore('tables', {
 
 export const actions_store = localStorageStore('actions', [
 	{
-		action_title: 'Delay 6',
-		action_url: 'https://httpbin.org/delay/6',
+		action_title: 'Clean All',
+		action_url: 'http://localhost:5005/clean',
 		request_method: 'POST',
 		request_args: []
 	}

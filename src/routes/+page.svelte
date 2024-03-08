@@ -18,7 +18,6 @@
 
 	function createInstrument() {
 		let instrumentCopy = { ...newInstrument };
-
 		let port_is_unique = true;
 		instruments.forEach((instrument) => {
 			if (instrument.port == newInstrument.port) {

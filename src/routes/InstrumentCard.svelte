@@ -4,11 +4,28 @@
 	export let port; // string but should parse to an int
 	import { instruments_store } from '$lib/stores.js';
 	import ConnectionStatus from '../lib/ConnectionStatus.svelte';
+	import InstrumentStatus from './InstrumentStatus.svelte';
 
 	let instruments = [];
 	instruments_store.subscribe((value) => {
 		instruments = value;
 	});
+	function statsPathFromType(type) {
+		// returns the path to the instrument status endpoint
+		// if none exists, returns 0
+		let paths = {
+			SPM: '/pman/status',
+			HamiltonPump: '/pman/status',
+			AuroraValve: '/pman/aurora-valve/status',
+			AuroraPump: '/pman/aurora-pump/status'
+		};
+
+		if (Object.keys(paths).includes(type)) {
+			return paths[type];
+		}
+		return 0;
+	}
+	let statusPath = statsPathFromType(type);
 	let iconFromType = {
 		SPM: '[ SPM ]',
 		SmartStageXY: '[ SmartStageXY ]',
@@ -44,6 +61,7 @@
 			<h3>{name}</h3>
 			{#if type !== 'VirtualInstrument'}
 				<ConnectionStatus {port}>{port}</ConnectionStatus>
+				<InstrumentStatus {port} {statusPath} />
 			{/if}
 		</div>
 		<div class="links">

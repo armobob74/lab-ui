@@ -7,6 +7,7 @@
 	console.log('setting url', status_url);
 	let status = 'status unknown';
 	let status_interval;
+	const status_interval_ms = 3000;
 
 	async function getStatus() {
 		const response = await fetch(status_url);
@@ -22,7 +23,7 @@
 		getStatus();
 		status_interval = setInterval(() => {
 			getStatus(port);
-		}, 500);
+		}, status_interval_ms);
 	});
 	onDestroy(() => {
 		clearInterval(status_interval);

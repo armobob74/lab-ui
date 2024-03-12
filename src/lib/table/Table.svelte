@@ -37,7 +37,15 @@
 		//sync the store with the data variable
 		//used when cell is changed
 		tables_store.update((tables) => {
-			tables[id].data = [...data];
+			let new_data = [];
+			data.forEach((row) => {
+				let new_row = [];
+				row.forEach((cell) => {
+					new_row.push(cell.trim());
+				});
+				new_data.push(new_row);
+			});
+			tables[id].data = new_data;
 			return tables;
 		});
 	}

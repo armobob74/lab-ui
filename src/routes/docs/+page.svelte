@@ -156,6 +156,16 @@
 				</ol>
 			</svelte:fragment>
 		</AccordionItem>
+		<AccordionItem bind:open={openStates[10]}>
+			<svelte:fragment slot="summary">Solid Dispenser</svelte:fragment>
+			<svelte:fragment slot="content">
+				<ol>
+					<li>
+						<a href="/docs"> dispense [] -- triggers a single dispense operation</a>
+					</li>
+				</ol>
+			</svelte:fragment>
+		</AccordionItem>
 	</Accordion>
 
 	<h3 class="h3">Basics: Steps and Protocols</h3>

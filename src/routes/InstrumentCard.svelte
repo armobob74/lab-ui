@@ -2,6 +2,7 @@
 	export let name; // string
 	export let type; // string
 	export let port; // string but should parse to an int
+	export let ip; // string ip addr
 	import { instruments_store } from '$lib/stores.js';
 	import ConnectionStatus from '../lib/ConnectionStatus.svelte';
 	import InstrumentStatus from './InstrumentStatus.svelte';
@@ -36,7 +37,8 @@
 		NewEraPump: '[ New Era Pump ]',
 		Elvesys: '[ Elvesys ]',
 		AuroraValve: '[ Aurora Valve ]',
-		AuroraPump: '[ Aurora Pump ]'
+		AuroraPump: '[ Aurora Pump ]',
+		SolidDispenser: '[ Solid Dispenser ]'
 	};
 	function deleteCard() {
 		instruments_store.update((current_instruments) => {
@@ -60,8 +62,8 @@
 		<div>
 			<h3>{name}</h3>
 			{#if type !== 'VirtualInstrument'}
-				<ConnectionStatus {port}>{port}</ConnectionStatus>
-				<InstrumentStatus {port} {statusPath} />
+				<ConnectionStatus {ip} {port}>{ip}:{port}</ConnectionStatus>
+				<InstrumentStatus {ip} {port} {statusPath} />
 			{/if}
 		</div>
 		<div class="links">

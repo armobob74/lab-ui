@@ -11,6 +11,9 @@ class Step {
 		// used to create the steps dropdown in the protocol writer
 		// all steps that do not match the selected instrument are filtered out
 		this.instrument_type = '';
+
+		// used to build action url
+		this.base = args_list[0];
 	}
 	async action() {
 		console.log('Please overwrite me, inheritor!');
@@ -19,16 +22,15 @@ class Step {
 
 class HamiltonTransfer extends Step {
 	constructor(args_list) {
-		//args_list format: ['port', 'from_port', 'to_port', 'vol']
+		//args_list format: ['base', 'from_port', 'to_port', 'vol']
 		super(args_list);
 		this.instrument_type = 'HamiltonPump';
-		this.port = args_list[0];
 		this.from_port = args_list[1];
 		this.to_port = args_list[2];
 		this.vol = args_list[3];
-		this.url = `http://localhost:${this.port}/pman/transfer`;
-		this.url_2 = `http://localhost:${this.port}/pman/listen`;
-		this.url_3 = `http://localhost:${this.port}/pman/buffer-is-empty`;
+		this.url = `${this.base}/pman/transfer`;
+		this.url_2 = `${this.base}/pman/listen`;
+		this.url_3 = `${this.base}/pman/buffer-is-empty`;
 	}
 	async bufferIsEmpty() {
 		return parseInt(await fetchPOST(this.url_3));
@@ -59,14 +61,13 @@ class HamiltonTransfer extends Step {
 }
 class SPM_Transfer extends Step {
 	constructor(args_list) {
-		//args_list format: ['port', 'from_port', 'to_port', 'vol']
+		//args_list format: ['base', 'from_port', 'to_port', 'vol']
 		super(args_list);
 		this.instrument_type = 'SPM';
-		this.port = args_list[0];
 		this.from_port = args_list[1];
 		this.to_port = args_list[2];
 		this.vol = args_list[3];
-		this.url = `http://localhost:${this.port}/pman/transfer`;
+		this.url = `${this.base}/pman/transfer`;
 	}
 	async action() {
 		// starts the transfer and returns the second response from the SPM
@@ -78,13 +79,12 @@ class SPM_Transfer extends Step {
 
 class DLIPowerSwitch extends Step {
 	constructor(args_list) {
-		//args_list format: [port, button_name,on/off]
+		//args_list format: [base, button_name,on/off]
 		super(args_list);
 		this.instrument_type = 'DLIPower';
-		this.port = args_list[0];
 		this.button_name = args_list[1];
 		this.on_or_off = args_list[2];
-		this.url = `http://localhost:${this.port}/pman/control`;
+		this.url = `${this.base}/pman/control`;
 	}
 	async action() {
 		return pmanPOST(this.url, [this.button_name, this.on_or_off]);
@@ -93,11 +93,10 @@ class DLIPowerSwitch extends Step {
 
 class TuyaSinglePress extends Step {
 	constructor(args_list) {
-		//args_list format: [port]
+		//args_list format: [base]
 		super(args_list);
 		this.instrument_type = 'TuyaFingerBot';
-		this.port = args_list[0];
-		this.url = `http://localhost:${this.port}/pman/single-press`;
+		this.url = `${this.base}/pman/single-press`;
 	}
 	async action() {
 		// should press tuya button exactly once
@@ -107,12 +106,11 @@ class TuyaSinglePress extends Step {
 
 class TuyaDoublePress extends Step {
 	constructor(args_list) {
-		//args_list format: [port, delay_sec]
+		//args_list format: [base, delay_sec]
 		super(args_list);
 		this.instrument_type = 'TuyaFingerBot';
-		this.port = args_list[0];
 		this.delay_sec = args_list[1];
-		this.url = `http://localhost:${this.port}/pman/double-press`;
+		this.url = `${this.base}/pman/double-press`;
 	}
 	async action() {
 		// should press tuya button once, then
@@ -126,11 +124,10 @@ class NEPull extends Step {
 	constructor(args_list) {
 		super(args_list);
 		this.instrument_type = 'NewEraPump';
-		this.port = args_list[0];
 		this.address = args_list[1];
 		this.vol = args_list[2];
 		this.rate = args_list[3];
-		this.url = `http://localhost:${this.port}/pman/pull`;
+		this.url = `${this.base}/pman/pull`;
 	}
 	async action() {
 		// tell the pump to pull
@@ -142,11 +139,10 @@ class NEPush extends Step {
 	constructor(args_list) {
 		super(args_list);
 		this.instrument_type = 'NewEraPump';
-		this.port = args_list[0];
 		this.address = args_list[1];
 		this.vol = args_list[2];
 		this.rate = args_list[3];
-		this.url = `http://localhost:${this.port}/pman/push`;
+		this.url = `${this.base}/pman/push`;
 	}
 	async action() {
 		// tell the pump to push
@@ -156,7 +152,7 @@ class NEPush extends Step {
 
 class Wait extends Step {
 	constructor(args_list) {
-		//args_list format: [sec]
+		//args_list format: [base, sec]
 		super(args_list);
 		this.instrument_type = 'VirtualInstrument';
 		this.sec = args_list[1];
@@ -174,7 +170,7 @@ class Wait extends Step {
 
 class Confirm extends Step {
 	constructor(args_list) {
-		//args_list format: [sec]
+		//args_list format: [base]
 		super(args_list);
 		this.instrument_type = 'VirtualInstrument';
 		this.url = `N/A`;
@@ -199,11 +195,10 @@ class ElvesysMux extends Step {
 	constructor(args_list) {
 		super(args_list);
 		this.instrument_type = 'Elvesys';
-		this.name = args_list[0];
 		this.device_name = args_list[1];
 		this.initial_state = args_list[2];
 		this.desired_state = args_list[3];
-		this.url = `http://localhost:${this.name}/pman/mux`;
+		this.url = `${this.base}/pman/mux`;
 	}
 	async action() {
 		return pmanPOST(this.url, [this.device_name, this.initial_state, this.desired_state]);
@@ -213,11 +208,10 @@ class ElvesysDist extends Step {
 	constructor(args_list) {
 		super(args_list);
 		this.instrument_type = 'Elvesys';
-		this.name = args_list[0];
 		this.device_name = args_list[1];
 		this.initial_set_valve_id = args_list[2];
 		this.desired_set_valve_id = args_list[3];
-		this.url = `http://localhost:${this.name}/pman/dist`;
+		this.url = `${this.base}/pman/dist`;
 	}
 	async action() {
 		return pmanPOST(this.url, [
@@ -231,11 +225,10 @@ class ElvesysOB1 extends Step {
 	constructor(args_list) {
 		super(args_list);
 		this.instrument_type = 'Elvesys';
-		this.name = args_list[0];
 		this.device_name = args_list[1];
 		this.channel_to_initialize = args_list[2];
 		this.pressure_to_set = args_list[3];
-		this.url = `http://localhost:${this.name}/pman/ob1`;
+		this.url = `${this.base}/pman/ob1`;
 	}
 	async action() {
 		return pmanPOST(this.url, [this.device_name, this.channel_to_initialize, this.pressure_to_set]);
@@ -245,9 +238,8 @@ class ElvesysFlowmeter extends Step {
 	constructor(args_list) {
 		super(args_list);
 		this.instrument_type = 'Elvesys';
-		this.name = args_list[0];
 		this.device_name = args_list[1];
-		this.url = `http://localhost:${this.name}/pman/dist/${this.device_name}`;
+		this.url = `${this.base}/pman/dist/${this.device_name}`;
 	}
 	async action() {
 		// this one's just a GET request
@@ -259,9 +251,8 @@ class AuroraValveSwitchPort extends Step {
 	constructor(args_list) {
 		super(args_list);
 		this.instrument_type = 'AuroraValve';
-		this.name = args_list[0];
 		this.to_port = args_list[1];
-		this.url = `http://localhost:${this.name}/pman/aurora-valve/switch-to-port`;
+		this.url = `${this.base}/pman/aurora-valve/switch-to-port`;
 	}
 	async action() {
 		return pmanPOST(this.url, [this.to_port]);
@@ -274,8 +265,7 @@ class AuroraPumpStep extends Step {
 	constructor(args_list) {
 		super(args_list);
 		this.instrument_type = 'AuroraPump';
-		this.port = args_list[0];
-		this.listen_url = `http://localhost:${this.port}/pman/aurora-pump/is-busy`;
+		this.listen_url = `${this.base}/pman/aurora-pump/is-busy`;
 	}
 	async waitForEnd() {
 		let stat = true;
@@ -296,7 +286,7 @@ class AuroraPumpTransfer extends AuroraPumpStep {
 		this.from_port = args_list[1];
 		this.to_port = args_list[2];
 		this.volume = args_list[3];
-		this.url = `http://localhost:${this.port}/pman/aurora-pump/transfer`;
+		this.url = `${this.base}/pman/aurora-pump/transfer`;
 	}
 	async action() {
 		await pmanPOST(this.url, [this.from_port, this.to_port, this.volume]);
@@ -308,7 +298,7 @@ class AuroraPumpSwitchPort extends AuroraPumpStep {
 	constructor(args_list) {
 		super(args_list);
 		this.valve_port = args_list[1];
-		this.url = `http://localhost:${this.port}/pman/aurora-pump/switch-to-port`;
+		this.url = `${this.base}/pman/aurora-pump/switch-to-port`;
 	}
 	async action() {
 		await pmanPOST(this.url, [this.valve_port]);
@@ -320,7 +310,7 @@ class AuroraPumpPull extends AuroraPumpStep {
 	constructor(args_list) {
 		super(args_list);
 		this.volume = args_list[1];
-		this.url = `http://localhost:${this.port}/pman/aurora-pump/pull`;
+		this.url = `${this.base}/pman/aurora-pump/pull`;
 	}
 	async action() {
 		await pmanPOST(this.url, [this.volume]);
@@ -332,7 +322,7 @@ class AuroraPumpPush extends AuroraPumpStep {
 	constructor(args_list) {
 		super(args_list);
 		this.volume = args_list[1];
-		this.url = `http://localhost:${this.port}/pman/aurora-pump/push`;
+		this.url = `${this.base}/pman/aurora-pump/push`;
 	}
 	async action() {
 		await pmanPOST(this.url, [this.volume]);
@@ -344,11 +334,22 @@ class AuroraPumpSetVelocity extends AuroraPumpStep {
 	constructor(args_list) {
 		super(args_list);
 		this.velocity = args_list[1];
-		this.url = `http://localhost:${this.port}/pman/aurora-pump/set-velocity`;
+		this.url = `${this.base}/pman/aurora-pump/set-velocity`;
 	}
 	async action() {
 		await pmanPOST(this.url, [this.velocity]);
 		return this.waitForEnd();
+	}
+}
+
+class DispenseStep extends Step {
+	constructor(args_list) {
+		super(args_list);
+		this.instrument_type = 'SolidDispenser';
+		this.url = `${this.base}/dispense`;
+	}
+	async action() {
+		return await pmanPOST(this.url, []);
 	}
 }
 // used to make options for the <select> tag in Protocol table
@@ -372,5 +373,6 @@ export let step_names = {
 	'Aurora Pump Switch Port': AuroraPumpSwitchPort,
 	'Aurora Pump Pull': AuroraPumpPull,
 	'Aurora Pump Push': AuroraPumpPush,
-	'Aurora Pump Set Velocity': AuroraPumpSetVelocity
+	'Aurora Pump Set Velocity': AuroraPumpSetVelocity,
+	Dispense: DispenseStep
 };

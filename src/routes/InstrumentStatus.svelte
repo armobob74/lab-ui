@@ -3,8 +3,9 @@
 
 	export let statusPath = '';
 	export let port = '5000';
-	let status_url = `http://localhost:${port}` + statusPath;
-	console.log('setting url', status_url);
+	export let ip = '127.0.0.1';
+	let status_url = `http://${ip}:${port}` + statusPath;
+	console.log('setting status url: ', status_url);
 	let status = 'status unknown';
 	let status_interval;
 	const status_interval_ms = 3000;

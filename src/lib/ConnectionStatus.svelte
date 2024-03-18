@@ -1,12 +1,13 @@
 <script>
 	export let port;
+	export let ip;
 	let connected = false;
 	let interval_milisecs = 3000;
 	let interval;
 	import { onDestroy, onMount } from 'svelte';
 	onMount(() => {
 		async function checkConnection(port) {
-			let target = `http://localhost:${port}`;
+			let target = `http://${ip}:${port}`;
 			try {
 				let response = await fetch(target);
 				connected = response.ok;

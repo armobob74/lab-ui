@@ -12,7 +12,11 @@
 			return false;
 		}
 		console.log(tabname);
-		let current_names = Object.keys(JSON.parse(localStorage.getItem('tables')));
+		if (localStorage.getItem(tables)) {
+			let current_names = Object.keys(JSON.parse(localStorage.getItem('tables')));
+		} else {
+			let current_names = [];
+		}
 		if (current_names.includes(tabname)) {
 			alert('Error: table name must be unique');
 			return false;

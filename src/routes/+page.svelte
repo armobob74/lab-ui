@@ -8,7 +8,8 @@
 	let newInstrument = {
 		name: '',
 		type: '',
-		port: 0
+		port: 0,
+		ip: '127.0.0.1'
 	};
 
 	let instruments = [];
@@ -84,11 +85,14 @@
 				<option>VirtualInstrument</option>
 				<option>AuroraValve</option>
 				<option>AuroraPump</option>
+				<option>SolidDispenser</option>
 			</select>
 			<label for="port">Port</label>
 			<input bind:value={newInstrument.port} type="text" class="input p-3" name="port" />
 			<label for="name">Name</label>
 			<input bind:value={newInstrument.name} type="text" class="input p-3" name="name" />
+			<label for="ip">IP</label>
+			<input bind:value={newInstrument.ip} type="text" class="input p-3" name="ip" />
 		</div>
 		<button class="btn variant-filled-primary" type="button" on:click={createInstrument}
 			>Create Instrument</button

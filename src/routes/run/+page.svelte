@@ -22,7 +22,8 @@
 			let args = row[2].split(',');
 			console.log(args);
 			// args_list actually goes to the Step object
-			let args_list = [instrument.port].concat(args);
+			let instrument_base_url = `http://${instrument.ip}:${instrument.port}`;
+			let args_list = [instrument_base_url].concat(args);
 			let step = new step_class((args_list = args_list));
 			return step;
 		});

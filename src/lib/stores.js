@@ -1,7 +1,7 @@
 import { localStorageStore } from '@skeletonlabs/skeleton';
 import { writable } from 'svelte/store';
 export const instruments_store = localStorageStore('instruments', [
-	{ name: 'Aqueous SPM', type: 'SPM', port: 5000 }
+	{ name: 'Aqueous SPM', type: 'SPM', port: 5000, ip: '127.0.0.1' }
 ]);
 
 export const tables_store = localStorageStore('tables', {

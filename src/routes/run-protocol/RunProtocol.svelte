@@ -48,7 +48,7 @@
 				invalid_format_flag = true;
 			}
 			// args_list actually goes to the Step object
-			let args_list = [instrument.port].concat(args);
+			let args_list = [`http://${instrument.ip}:${instrument.port}`].concat(args);
 			let step = new step_class((args_list = args_list));
 			step.instrument_name = instrument.name;
 			step.name = row[1];

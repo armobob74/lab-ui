@@ -1,0 +1,1 @@
+this directory is where the instrument servers and python venv will be stored if the clone_repos.zsh or Clone-Repos.ps1 scripts are run. These scripts provide a convenient way to install the required servers on any machines that use the lab-ui.

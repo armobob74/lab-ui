@@ -38,13 +38,19 @@
 	function save() {
 		// Create a new workbook
 		const workbook = XLSX.utils.book_new();
-
 		// Iterate over each table in the tables object
 		Object.keys(tables).forEach((tabName) => {
 			const table = tables[tabName];
-			const reformattedTable = convertFormat(table);
-			console.log(reformattedTable);
-			const worksheet = XLSX.utils.json_to_sheet(reformattedTable);
+			let columns = table.columns; // an array of strings
+			let data = table.data; // an array of arrays
+			let aoa = [];
+			if (columns.length > 0) {
+				aoa = [columns].concat(data);
+			} else {
+				aoa = data;
+			}
+			console.log(aoa);
+			const worksheet = XLSX.utils.aoa_to_sheet(aoa);
 			XLSX.utils.book_append_sheet(workbook, worksheet, tabName);
 		});
 
